@@ -1,11 +1,11 @@
 package com.petshop.petshop_system.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,18 +17,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cliente extends Pessoa {
 
-    @Column(length = 11, nullable = false)
-    private String cpf;
-
     @Column(length = 100)
     private String profissao;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Animal> animais;
+
     // Construtor que chama o construtor da classe Pessoa
-    public Cliente(UUID id, String nome, String nacionalidade, String celular, String telefone, String email,
-                   LocalDateTime dataCadastro, Endereco endereco, String cpf, String profissao) {
-        super(id, nome, nacionalidade, celular, telefone, email, dataCadastro, endereco);
-        this.cpf = cpf;
+    public Cliente(String nome, String celular, String telefone, String email, Endereco endereco, String cpf, String login, String senha) {
+        super(cpf, nome, celular, telefone, email, endereco, login, senha);
         this.profissao = profissao;
+        this.animais = new ArrayList<>();
     }
 }
 

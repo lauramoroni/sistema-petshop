@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Pessoa</title>
+</head>
+<body>
+    <h2>Cadastro de Pessoa</h2>
+
+    <form th:action="@{/cliente/salvar}" th:object="${pessoa}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" required><br>
+
+        <label for="nacionalidade">Nacionalidade:</label>
+        <input type="text" id="nacionalidade" th:field="*{nacionalidade}"><br>
+
+        <label for="celular">Celular:</label>
+        <input type="text" id="celular" th:field="*{celular}"><br>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" th:field="*{telefone}"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required><br>
+
+        <h3>Endereço</h3>
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" th:field="*{endereco.cep}"><br>
+
+        <label for="rua">Rua:</label>
+        <input type="text" id="rua" th:field="*{endereco.rua}"><br>
+
+        <label for="numero">Número:</label>
+        <input type="number" id="numero" th:field="*{endereco.numero}"><br>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" th:field="*{endereco.cidade}"><br>
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" th:field="*{endereco.estado}"><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <p th:text="${mensagem}"></p>
+</body>
+</html>

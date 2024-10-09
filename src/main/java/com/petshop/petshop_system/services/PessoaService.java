@@ -18,8 +18,4 @@ public class PessoaService {
         return pessoaRepository.findAll();
     }
 
-    public void salvarCliente(Pessoa pessoa) {
-        pessoaRepository.save(pessoa);
-    }
-
 }

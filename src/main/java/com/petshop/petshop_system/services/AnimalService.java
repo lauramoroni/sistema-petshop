@@ -37,10 +37,8 @@ public class AnimalService {
     public Animal update(UUID id, Animal animal) {
         Animal existAnimal = findById(id);
         existAnimal.setNome(animal.getNome());
-        existAnimal.setEspecie(animal.getEspecie());
         existAnimal.setEsterilizacao(animal.getEsterilizacao());
         existAnimal.setPelagem(animal.getPelagem());
-        existAnimal.setRaca(animal.getRaca());
         existAnimal.setSexo(animal.getSexo());
         existAnimal.setStatus(animal.getStatus());
 

@@ -37,14 +37,6 @@ public class Animal {
 
     private String sexo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_especie", nullable=false)
-    private Especie especie;
-
-    @ManyToOne
-    @JoinColumn(name = "id_raca")
-    private Raca raca;
-
     private String pelagem;
     private String status;
     private String Esterilizacao;

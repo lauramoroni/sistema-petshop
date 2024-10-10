@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_medvet")
 public class MedVet extends Pessoa{
 
-    @Id
+    @Column(unique = true, nullable = false, length = 11)
     private String crmv;
 
     private String especialidade;

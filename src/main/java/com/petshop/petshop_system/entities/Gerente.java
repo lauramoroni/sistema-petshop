@@ -14,8 +14,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Gerente extends Pessoa{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(unique = true, nullable = false, length = 11)
     private UUID id;
 
     @Builder

@@ -21,28 +21,26 @@ public class GerenteService {
     }
 
     public Gerente findById(UUID id) {
-        //return GerenteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
+        return gerenteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
     }
 
+    public Gerente update( Gerente gerente, UUID id){
+        Gerente gerenteUpdate = findById(id);
+        gerenteUpdate.setCelular(gerenteUpdate.getCelular());
+        gerenteUpdate.setNome(gerenteUpdate.getNome());
+        gerenteUpdate.setEmail(gerenteUpdate.getEmail());
+        gerenteUpdate.setCpf(gerenteUpdate.getCpf());
+        gerenteUpdate.setEndereco(gerenteUpdate.getEndereco());
+        gerenteUpdate.setTelefone(gerenteUpdate.getTelefone());
 
-    public PessoaFisica update( PessoaFisica pessoaFisica, UUID id){
-        PessoaFisica pessoaFisicaId = findById(id);
-        pessoaFisicaId.setCelular(pessoaFisica.getCelular());
-        pessoaFisicaId.setNome(pessoaFisica.getNome());
-        pessoaFisicaId.setEmail(pessoaFisica.getEmail());
-        pessoaFisicaId.setSexo(pessoaFisica.getSexo());
-        pessoaFisicaId.setAnimais(pessoaFisica.getAnimais());
-        pessoaFisicaId.setCadUnico(pessoaFisica.getCadUnico());
-        pessoaFisicaId.setCpf(pessoaFisica.getCpf());
-        // pessoaFisicaId.setData_cadastro(pessoaFisica.getData_cadastro()); //data de cadastro n deve mudar
-        pessoaFisicaId.setEndereco(pessoaFisica.getEndereco());
-        pessoaFisicaId.setNacionalidade(pessoaFisica.getNacionalidade());
-        pessoaFisicaId.setTelefone(pessoaFisica.getTelefone());
-
-        return pessoaFisicaRepository.save(pessoaFisicaId);
+        return gerenteRepository.save(gerenteUpdate);
     }
     public List<Gerente> listar() {
         return gerenteRepository.findAll();
+    }
+
+    public void delete(UUID id) {
+        gerenteRepository.deleteById(id);
     }
 
 }

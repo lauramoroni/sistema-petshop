@@ -34,7 +34,7 @@ public abstract class Pessoa {
     @Column(length = 50)
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "id_endereco")
     private Endereco endereco;
 

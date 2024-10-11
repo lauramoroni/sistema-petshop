@@ -18,16 +18,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cliente extends Pessoa {
 
-    @Column(length = 100)
-    private String profissao;
-
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Animal> animais;
 
     // Construtor que chama o construtor da classe Pessoa
     public Cliente(String nome, String celular, String telefone, String email, Endereco endereco, String cpf, String login, String senha) {
         super(cpf, nome, celular, telefone, email, endereco, login, senha);
-        this.profissao = profissao;
         this.animais = new ArrayList<>();
     }
 }

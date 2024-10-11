@@ -40,8 +40,10 @@ public class ClienteController {
         return "/cliente/login";
     }
 
-    @GetMapping("/home")
-    public String homeCliente( ) {
+    @GetMapping("/{cpf}/home")
+    public String homeCliente( Model model, @PathVariable String cpf ) {
+        Cliente cliente = clienteService.findByCPF(cpf);
+        model.addAttribute("cliente", cliente);
         return "/cliente/Home_Cliente";
     }
 
@@ -51,14 +53,9 @@ public class ClienteController {
                                  Model model) {
         Cliente clienteCPF = clienteService.findByCPF(cpf);
 
-
-        if (clienteCPF.getProfissao() == null && clienteCPF.getAnimais().isEmpty()) {
-            // Se o cliente não for encontrado
-            model.addAttribute("erro", "Cliente não encontrado. Por favor, cadastre-se.");
-            return "redirect:/cliente/cadastro"; // Redireciona para a página de cadastro
-        } else if (clienteCPF.getSenha().equals(senha)) {
+        if (clienteCPF.getSenha().equals(senha)) {
             // Se a senha estiver correta
-            return "redirect:/cliente/home"; // Redireciona para a página inicial do cliente
+            return "redirect:/cliente/"+cpf+"/home"; // Redireciona para a página inicial do cliente
         } else {
             // Se a senha estiver incorreta
             model.addAttribute("erro", "Senha incorreta");
@@ -69,7 +66,6 @@ public class ClienteController {
 
     // Página para listar clientes
     @GetMapping("/listar")
-    @ResponseBody
     public List<Cliente> listarClientes() {
        return clienteService.findAll();
     }

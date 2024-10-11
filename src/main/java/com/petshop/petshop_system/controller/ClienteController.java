@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cliente")
@@ -25,13 +26,6 @@ public class ClienteController {
         return "/cliente/cliente_form";
     }
 
-    // Página de login do usuário
-    @GetMapping("/login")
-    public ModelAndView formularioLogin() {
-        ModelAndView mvLogin = new ModelAndView("/cliente/login");
-        return mvLogin;
-    }
-
     // Salva um novo cliente
     @PostMapping("/salvar")
     public String salvarCliente(@ModelAttribute Cliente cliente, RedirectAttributes redirectAttributes) {
@@ -39,6 +33,39 @@ public class ClienteController {
         redirectAttributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso!");
         return "redirect:/cliente/cadastro";
     }
+
+    // Página de login do usuário
+    @GetMapping("/login")
+    public String formularioLogin( ) {
+        return "/cliente/login";
+    }
+
+    @GetMapping("/home")
+    public String homeCliente( ) {
+        return "/cliente/Home_Cliente";
+    }
+
+    @PostMapping("/login")
+    public String processarLogin(@RequestParam String cpf,
+                                 @RequestParam String senha,
+                                 Model model) {
+        Cliente clienteCPF = clienteService.findByCPF(cpf);
+
+
+        if (clienteCPF.getProfissao() == null && clienteCPF.getAnimais().isEmpty()) {
+            // Se o cliente não for encontrado
+            model.addAttribute("erro", "Cliente não encontrado. Por favor, cadastre-se.");
+            return "redirect:/cliente/cadastro"; // Redireciona para a página de cadastro
+        } else if (clienteCPF.getSenha().equals(senha)) {
+            // Se a senha estiver correta
+            return "redirect:/cliente/home"; // Redireciona para a página inicial do cliente
+        } else {
+            // Se a senha estiver incorreta
+            model.addAttribute("erro", "Senha incorreta");
+            return "redirect: /cliente/login"; // Retorna para a página de login
+        }
+    }
+
 
     // Página para listar clientes
     @GetMapping("/listar")

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.petshop.petshop_system.entities.Animal;
+import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.repositories.AnimalRepository;
 
 @Service
@@ -20,6 +21,10 @@ public class AnimalService {
     public List<Animal> findAll() {
         return animalRepository.findAll();
     }
+
+public List<Animal> findByMedVet(MedVet medVet) {
+    return animalRepository.findByMedVet(medVet);  // Implementar no repository
+}
 
     // Método para buscar um animal por ID
     public Animal findById(UUID id) {
@@ -38,9 +43,7 @@ public class AnimalService {
         Animal existAnimal = findById(id);
         existAnimal.setNome(animal.getNome());
         existAnimal.setEsterilizacao(animal.getEsterilizacao());
-        existAnimal.setPelagem(animal.getPelagem());
         existAnimal.setSexo(animal.getSexo());
-        existAnimal.setStatus(animal.getStatus());
 
         return animalRepository.save(existAnimal);
     }

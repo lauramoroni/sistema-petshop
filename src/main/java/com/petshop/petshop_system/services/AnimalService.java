@@ -2,11 +2,13 @@ package com.petshop.petshop_system.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.petshop.petshop_system.entities.Animal;
+import com.petshop.petshop_system.entities.Cliente;
 import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.repositories.AnimalRepository;
 
@@ -16,14 +18,20 @@ public class AnimalService {
     @Autowired
     private AnimalRepository animalRepository;  
 
+    @Autowired
+    ClienteService clienteService;
+
+    @Autowired
+    MedVetService medVetService;
+
     // Método para listar todos os animais
     public List<Animal> findAll() {
         return animalRepository.findAll();
     }
 
-public List<Animal> findByMedVet(MedVet medVet) {
-    return animalRepository.findByMedVet(medVet);  // Implementar no repository
-}
+    public List<Animal> findByMedVet(MedVet medVet) {
+        return animalRepository.findByMedVet(medVet);  // Implementar no repository
+    }
 
     // Método para buscar um animal por ID
     public Animal findById(Long id) {
@@ -33,9 +41,17 @@ public List<Animal> findByMedVet(MedVet medVet) {
 
     // Método para inserir um animal
     public Animal insert(Animal animal) { 
-        //animal.setId(null);  // Garantir que o ID seja gerado automaticamente
-        return animalRepository.save(animal);
-    }
+    // Certifique-se de que o cliente e o veterinário estão corretamente associados ao animal
+    Cliente cliente = clienteService.findByCPF(animal.getCliente().getCpf());
+    animal.setCliente(cliente);
+
+    // Você pode precisar adicionar um campo para associar o veterinário, caso ainda não tenha feito isso
+    MedVet medvet = medVetService.FindByCRMV(animal.getMedVet().getCrmv());
+    animal.setMedVet(medvet);
+
+    return animalRepository.save(animal);
+}
+
 
     // Método para atualizar um animal
     public Animal update(Long id, Animal animal) {

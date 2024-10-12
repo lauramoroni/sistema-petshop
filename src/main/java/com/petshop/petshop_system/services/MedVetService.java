@@ -22,7 +22,7 @@ public class MedVetService {
 
     public MedVet login(String crmv, String senha) {
         // Busca o veterinário pelo CRMV e senha
-        MedVet veterinario = medVetRepository.findByCrmvAndSenha(crmv, senha);
+        MedVet veterinario = medVetRepository.findMedVetByCrmv(crmv);
         if (veterinario != null && veterinario.getSenha().equals(senha)) {
             return veterinario;
         }

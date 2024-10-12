@@ -27,4 +27,5 @@ public class MedVet extends Pessoa{
         this.crmv = crmv;
         this.especialidade = especialidade;
     }
+
 }

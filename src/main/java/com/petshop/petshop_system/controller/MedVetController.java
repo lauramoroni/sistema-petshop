@@ -20,4 +20,9 @@ public class MedVetController {
         return "/medvet/login";
     }
 
+    // Página de listagem dos animais que o veterinário atende
+    @GetMapping("/{crmv}")
+    public String listAnimal() {
+        return "medvet/list_animal";
+    }
 }

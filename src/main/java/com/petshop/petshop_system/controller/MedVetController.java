@@ -27,7 +27,7 @@ public class MedVetController {
     // Página de login veterinário (quem cadastra é o gerente)
     @GetMapping("/login")
     public String formularioLogin() {
-        return "/medvet/login";
+        return "medvet/login";
     }
 
     @PostMapping("/login")
@@ -38,7 +38,7 @@ public class MedVetController {
             return "redirect:/veterinario/" + crmv; // Redireciona para a página do veterinário com a lista dos animais
         } else {
             model.addAttribute("error", "CRMV ou senha inválidos");
-            return "/medvet/login"; // Retorna para o login com erro
+            return "medvet/login"; // Retorna para o login com erro
         }
     }
 

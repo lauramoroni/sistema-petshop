@@ -31,7 +31,7 @@ public class ClienteController {
     public String salvarCliente(@ModelAttribute Cliente cliente, RedirectAttributes redirectAttributes) {
         clienteService.salvarCliente(cliente);
         redirectAttributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso!");
-        return "redirect:/cliente/cadastro";
+        return "redirect:/cliente/"+cliente.getCpf()+"/home";
     }
 
     // Página de login do usuário
@@ -63,6 +63,18 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/{cpf}/editar-cliente")
+    public String formularioEditarCliente(@PathVariable String cpf, Model model) {
+        Cliente cliente = clienteService.findByCPF(cpf);
+        model.addAttribute("cliente", cliente);
+        return "/cliente/cliente_update";
+    }
+
+    @PostMapping("/{cpf}/editar-cliente")
+    public String processarEditarCliente(@ModelAttribute Cliente cliente, RedirectAttributes redirectAttributes) {
+        clienteService.salvarCliente(cliente);
+        return "redirect:/cliente/"+cliente.getCpf()+"/home";
+    }
 
     // Página para listar clientes
     @GetMapping("/listar")

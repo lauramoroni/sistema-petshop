@@ -34,12 +34,11 @@ public class Animal {
     @Column(nullable=false)
     private String nome;
 
+    @Column(nullable=false)
     private String sexo;
 
-    private String pelagem;
-    private String status;
+    @Column(nullable=false)
     private String Esterilizacao;
-
 
     @ManyToOne
     @JoinColumn(name="cpf", nullable=false)

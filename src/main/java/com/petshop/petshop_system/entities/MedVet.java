@@ -19,6 +19,7 @@ public class MedVet extends Pessoa{
     @Column(unique = true, nullable = false, length = 11)
     private String crmv;
 
+    @Column(nullable = false)
     private String especialidade;
 
     @Builder

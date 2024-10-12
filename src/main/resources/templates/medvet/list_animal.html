@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Animais</title>
-    <link rel="stylesheet" href="static/css/style.css"> <!-- Você pode adicionar seu próprio CSS -->
+    <!-- <link rel="stylesheet" href="static/css/style.css"> Você pode adicionar seu próprio CSS -->
 </head>
 <body>
     <h1>Lista de Animais</h1>
@@ -14,10 +14,6 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Sexo</th>
-                <th>Espécie</th>
-                <th>Raça</th>
-                <th>Pelagem</th>
-                <th>Status</th>
                 <th>Esterilização</th>
                 <th>Dono</th>
             </tr>
@@ -27,12 +23,8 @@
                 <td th:text="${animal.id}"></td>
                 <td th:text="${animal.nome}"></td>
                 <td th:text="${animal.sexo}"></td>
-                <td th:text="${animal.especie.nome}"></td> <!-- Considerando que Especie tem um atributo nome -->
-                <td th:text="${animal.raca.nome}"></td> <!-- Considerando que Raca tem um atributo nome -->
-                <td th:text="${animal.pelagem}"></td>
-                <td th:text="${animal.status}"></td>
                 <td th:text="${animal.esterilizacao}"></td>
-                <td th:text="${animal.pessoa.nome}"></td> <!-- Considerando que Pessoa tem um atributo nome -->
+                <td th:text="${animal.cliente.nome}"></td>
             </tr>
         </tbody>
     </table>
@@ -49,26 +41,15 @@
             <option value="Fêmea">Fêmea</option>
         </select>
         
-        <label for="especie">Espécie:</label>
-        <input type="text" id="especie" name="especie" required>
-        
-        <label for="raca">Raça:</label>
-        <input type="text" id="raca" name="raca">
-        
-        <label for="pelagem">Pelagem:</label>
-        <input type="text" id="pelagem" name="pelagem">
-        
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status">
-        
         <label for="esterilizacao">Esterilização:</label>
         <select id="esterilizacao" name="esterilizacao">
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
+            <option value="Castrado">Castrado</option>
+            <option value="Vasectomizado">Vasectomizado</option>
+            <option value="Fértil">Fértil</option>
         </select>
 
-        <label for="pessoa">Nome do Dono:</label>
-        <input type="text" id="pessoa" name="pessoa" required>
+        <label for="cliente">Nome do Dono:</label>
+        <input type="text" id="cliente" name="cliente" required>
 
         <button type="submit">Adicionar</button>
     </form>

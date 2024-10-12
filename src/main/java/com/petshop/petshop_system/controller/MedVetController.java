@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.petshop.petshop_system.entities.Animal;
+import com.petshop.petshop_system.entities.Cliente;
 import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.services.AnimalService;
 import com.petshop.petshop_system.services.MedVetService;
@@ -60,7 +61,27 @@ public class MedVetController {
 
     // Pagina de cadastro de animal
     @GetMapping("/{crmv}/{id_cliente}")
-    public String formularioAnimal() {
+    public String formularioAnimal(@PathVariable String crmv, @PathVariable Long id_cliente, Model model) {
+        model.addAttribute("crmv", crmv);
+        model.addAttribute("id_cliente", id_cliente);
         return "/medvet/form_animal";
+    }
+
+    // Método para processar o formulário e cadastrar o animal
+    @PostMapping("/{crmv}/{id_cliente}")
+    public String insertAnimal(@PathVariable String crmv, @PathVariable String cpf, Animal animal) {
+        // Associar o veterinário e o cliente ao animal
+        MedVet veterinario = medVetService.FindByCRMV(crmv);
+        animal.setMedVet(veterinario);
+
+        Cliente cliente = new Cliente(); // Adicionar a lógica de busca do cliente usando o id_cliente
+        cliente.setCpf(cpf);;
+        animal.setCliente(cliente);
+
+        // Salvar o novo animal
+        animalService.insert(animal);
+
+        // Redireciona para a lista de animais do veterinário
+        return "redirect:/veterinario/" + crmv;
     }
 }

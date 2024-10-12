@@ -30,6 +30,7 @@ public class MedVetController {
     }
 
     // Página de listagem dos animais que o veterinário atende
+    @GetMapping("/{crmv}")
     public String listAnimal(@PathVariable String crmv, Model model) {
     MedVet veterinario = medVetService.FindByCRMV(crmv);
     

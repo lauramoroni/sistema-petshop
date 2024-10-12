@@ -6,7 +6,6 @@ import com.petshop.petshop_system.entities.Animal;
 import com.petshop.petshop_system.services.AnimalService;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,21 +47,21 @@ public class AnimalController {
 
     // Método para buscar uma espécie por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Animal> getById(@PathVariable UUID id) {
+    public ResponseEntity<Animal> getById(@PathVariable Long id) {
         Animal Animal = animalService.findById(id);
         return ResponseEntity.ok().body(Animal);
     }
 
     // Método para atualizar uma espécie existente
     @PutMapping("/{id}")
-    public ResponseEntity<Animal> update(@PathVariable UUID id, @RequestBody Animal animal) {
+    public ResponseEntity<Animal> update(@PathVariable Long id, @RequestBody Animal animal) {
         Animal updatedAnimal = animalService.update(id, animal);
         return ResponseEntity.ok().body(updatedAnimal);
     }
 
     // Método para deletar uma espécie
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         animalService.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,6 +1,5 @@
 package com.petshop.petshop_system.services;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,7 @@ public List<Animal> findByMedVet(MedVet medVet) {
 }
 
     // Método para buscar um animal por ID
-    public Animal findById(UUID id) {
+    public Animal findById(Long id) {
         return animalRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal não encontrada"));
     }
@@ -39,7 +38,7 @@ public List<Animal> findByMedVet(MedVet medVet) {
     }
 
     // Método para atualizar um animal
-    public Animal update(UUID id, Animal animal) {
+    public Animal update(Long id, Animal animal) {
         Animal existAnimal = findById(id);
         existAnimal.setNome(animal.getNome());
         existAnimal.setEsterilizacao(animal.getEsterilizacao());
@@ -49,7 +48,7 @@ public List<Animal> findByMedVet(MedVet medVet) {
     }
 
     //Método para deletar um animal
-    public void delete(UUID id) {
+    public void delete(Long id) {
         Animal animal = findById(id);
         animalRepository.delete(animal);
     }

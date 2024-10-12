@@ -29,7 +29,7 @@ public class Animal {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_animal")
-    private UUID id;  //posteriormente devemos definir um padrão de id para o animal
+    private Long id;  //posteriormente devemos definir um padrão de id para o animal
 
     @Column(nullable=false)
     private String nome;

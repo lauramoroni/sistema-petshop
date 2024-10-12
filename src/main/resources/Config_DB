@@ -1,0 +1,4 @@
+// Criar view no postgresql
+CREATE VIEW vw_cliente_info AS
+SELECT nome, telefone, email
+FROM tb_cliente;

@@ -43,4 +43,9 @@ public class Animal {
     @ManyToOne
     @JoinColumn(name="cpf", nullable=false)
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "medvet_crmv", nullable = false)
+    private MedVet medVet;  // Associação com o veterinário
+
 }

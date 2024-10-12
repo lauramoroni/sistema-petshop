@@ -2,7 +2,6 @@ package com.petshop.petshop_system.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +18,7 @@ public class MedVet extends Pessoa{
     @Column(unique = true, nullable = false, length = 11)
     private String crmv;
 
+    @Column(nullable = false)
     private String especialidade;
 
     @Builder
@@ -27,4 +27,5 @@ public class MedVet extends Pessoa{
         this.crmv = crmv;
         this.especialidade = especialidade;
     }
+
 }

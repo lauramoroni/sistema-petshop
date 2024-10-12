@@ -1,15 +1,10 @@
 package com.petshop.petshop_system.services;
 
-import com.petshop.petshop_system.entities.Gerente;
 import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.repositories.MedVetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class MedVetService {
@@ -25,18 +20,27 @@ public class MedVetService {
         return medVetRepository.save(medvet);
     }
 
+    public MedVet login(String crmv, String senha) {
+        // Busca o veterinário pelo CRMV e senha
+        MedVet veterinario = medVetRepository.findByCrmvAndSenha(crmv, senha);
+        if (veterinario != null && veterinario.getSenha().equals(senha)) {
+            return veterinario;
+        }
+        return null;
+    }
+
     public MedVet FindByCRMV(String crmv) {
         return medVetRepository.findMedVetByCrmv(crmv);
     }
 
     public MedVet update( MedVet medVet, String crmv ){
         MedVet medVetUpdate = FindByCRMV(crmv);
-        medVetUpdate.setCelular(medVetUpdate.getCelular());
-        medVetUpdate.setNome(medVetUpdate.getNome());
-        medVetUpdate.setEmail(medVetUpdate.getEmail());
-        medVetUpdate.setCpf(medVetUpdate.getCpf());
-        medVetUpdate.setEndereco(medVetUpdate.getEndereco());
-        medVetUpdate.setTelefone(medVetUpdate.getTelefone());
+        medVetUpdate.setCelular(medVet.getCelular());
+        medVetUpdate.setNome(medVet.getNome());
+        medVetUpdate.setEmail(medVet.getEmail());
+        medVetUpdate.setCpf(medVet.getCpf());
+        medVetUpdate.setEndereco(medVet.getEndereco());
+        medVetUpdate.setTelefone(medVet.getTelefone());
 
         return medVetRepository.save(medVetUpdate);
     }

@@ -1,7 +1,5 @@
 package com.petshop.petshop_system.entities;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
@@ -29,19 +27,23 @@ public class Animal {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_animal")
-    private UUID id;  //posteriormente devemos definir um padrão de id para o animal
+    private Long id;  //posteriormente devemos definir um padrão de id para o animal
 
     @Column(nullable=false)
     private String nome;
 
+    @Column(nullable=false)
     private String sexo;
 
-    private String pelagem;
-    private String status;
+    @Column(nullable=false)
     private String Esterilizacao;
-
 
     @ManyToOne
     @JoinColumn(name="cpf", nullable=false)
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "medvet_crmv", nullable = false)
+    private MedVet medVet;  // Associação com o veterinário
+
 }

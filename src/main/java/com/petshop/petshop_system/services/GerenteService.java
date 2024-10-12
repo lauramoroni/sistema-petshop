@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class GerenteService {
@@ -20,11 +19,11 @@ public class GerenteService {
         return gerenteRepository.save(gerente);
     }
 
-    public Gerente findById(UUID id) {
+    public Gerente findById(String id) {
         return gerenteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
     }
 
-    public Gerente update( Gerente gerente, UUID id){
+    public Gerente update( Gerente gerente, String id){
         Gerente gerenteUpdate = findById(id);
         gerenteUpdate.setCelular(gerenteUpdate.getCelular());
         gerenteUpdate.setNome(gerenteUpdate.getNome());
@@ -39,7 +38,7 @@ public class GerenteService {
         return gerenteRepository.findAll();
     }
 
-    public void delete(UUID id) {
+    public void delete(String id) {
         gerenteRepository.deleteById(id);
     }
 

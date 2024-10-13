@@ -20,5 +20,7 @@ public class VwClienteInfo {
 
     private String celular;
     private String email;
+
+    
 }
 

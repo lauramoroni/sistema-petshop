@@ -26,14 +26,16 @@ public class MedVetController {
     AnimalService animalService;
     @Autowired
     VwClienteInfoService vwClienteInfoService;
+    @Autowired
+    ClienteService clienteService;
 
     // Página de login veterinário (quem cadastra é o gerente)
     @GetMapping("/login")
     public String formularioLogin() {
-        return "medvet/login";
+        return "/medvet/login";
     }
 
-    @PostMapping("/teste")
+    @PostMapping("/login")
     public String loginVeterinario(@RequestParam String crmv, @RequestParam String senha, Model model) {
         MedVet veterinario = medVetService.login(crmv, senha); // Método de validação de login
 
@@ -41,29 +43,14 @@ public class MedVetController {
             return "redirect:/veterinario/" + crmv; // Redireciona para a página do veterinário com a lista dos animais
         } else {
             model.addAttribute("error", "CRMV ou senha inválidos");
-            return "medvet/login"; // Retorna para o login com erro
+            return "redirect:/veterinario/login"; // Retorna para o login com erro
         }
     }
 
-    /* Página de listagem dos animais que o veterinário atende
-    @GetMapping("/{crmv}")
-    public String listAnimal(@PathVariable String crmv, Model model) {
-        MedVet veterinario = medVetService.FindByCRMV(crmv);
-
-        List<Animal> animais = animalService.findByMedVet(veterinario);
-
-        // Passa os dados dos animais para a view
-        model.addAttribute("animais", animais);
-        return "medvet/list_animal";
-    }*/
-
     @GetMapping("/{crmv}")
     public String homePage(@PathVariable String crmv, Model model) {
-       // MedVet veterinario = medVetService.FindByCRMV(crmv);
-
         List<VwClienteInfo> clienteInfos = vwClienteInfoService.findAll();
 
-        // Passa os dados dos animais para a view
         model.addAttribute("clienteInfos", clienteInfos);
         return "medvet/home_medvet";
 
@@ -79,19 +66,43 @@ public class MedVetController {
 
     // Método para processar o formulário e cadastrar o animal
     @PostMapping("/{crmv}/{id_cliente}")
-    public String insertAnimal(@PathVariable String crmv, @PathVariable String cpf, Animal animal) {
-        // Associar o veterinário e o cliente ao animal
+    public String insertAnimal(@PathVariable String crmv, @PathVariable String id_cliente, Animal animal) {
+        // Buscar o veterinário pelo CRMV
         MedVet veterinario = medVetService.FindByCRMV(crmv);
+        if (veterinario == null) {
+            return "redirect:/error";
+        }
         animal.setMedVet(veterinario);
 
-        Cliente cliente = new Cliente(); // Adicionar a lógica de busca do cliente usando o id_cliente
-        cliente.setCpf(cpf);;
+        // Buscar o cliente pelo ID do cliente
+        Cliente cliente = clienteService.findByCPF(id_cliente);
+        if (cliente == null) {
+            return "redirect:/error";
+        }
         animal.setCliente(cliente);
 
-        // Salvar o novo animal
         animalService.insert(animal);
 
         // Redireciona para a lista de animais do veterinário
         return "redirect:/veterinario/" + crmv;
     }
+
+    @GetMapping("/{crmv}/cliente/{id_cliente}/animais")
+    public String listAnimais(@PathVariable String crmv, @PathVariable String id_cliente, Model model) {
+        Cliente cliente = clienteService.findByCPF(id_cliente);
+
+        // Verifique se o cliente foi encontrado
+        if (cliente == null) {
+            return "redirect:/error";
+        }
+
+        // Buscar os animais associados ao cliente
+        List<Animal> animais = animalService.findByCliente(cliente);
+
+        model.addAttribute("animais", animais);
+        model.addAttribute("cliente", cliente);
+
+        return "medvet/list_animais_cliente";
+    }
+
 }

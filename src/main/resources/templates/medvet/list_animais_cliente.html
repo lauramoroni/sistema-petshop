@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animais do Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="container my-2">
+    <h1 th:text="'Animais de ' + ${cliente.nome}"></h1>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sexo</th>
+            <th>Esterilização</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="animal : ${animais}">
+            <td th:text="${animal.nome}"></td>
+            <td th:text="${animal.sexo}"></td>
+            <td th:text="${animal.Esterilizacao}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{'/veterinario/' + ${crmv}}">Voltar</a>
+
+</div>
+</body>
+</html>

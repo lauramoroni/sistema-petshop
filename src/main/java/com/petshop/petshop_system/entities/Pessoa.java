@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public abstract class Pessoa {
 
     @Id
+    @Column
     private String cpf;
 
     @Column(length = 50, nullable=false)

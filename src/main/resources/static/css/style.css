@@ -1,68 +1,151 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
 h1, h2 {
     text-align: center;
     color: #333;
+    font-weight: 300;
+    margin-top: 20px;
 }
 
+a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+a:hover {
+    color: #3e8e41;
+}
+
+/* Container for Page Content */
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Table Styling */
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
+    margin: 20px 0;
     border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-    padding: 12px;
+    padding: 15px 20px;
     text-align: left;
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #009688;
     color: white;
+    font-size: 16px;
+}
+
+td {
+    color: #555;
+    font-size: 14px;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f7f7f7;
 }
 
+tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Forms Styling */
 form {
-    width: 50%;
+    width: 60%;
     margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ddd;
 }
 
 form label {
     display: block;
-    margin-bottom: 8px;
-    color: #333;
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-form input, form select, form button {
+form input, form select, form textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 form button {
-    background-color: #4CAF50;
+    width: 100%;
+    background-color: #009688;
     color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 form button:hover {
-    background-color: #45a049;
+    background-color: #00796b;
+}
+
+/* Form Fields Focus Effect */
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #009688;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
+}
+
+/* Button Styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #009688;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #00796b;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+    
+    table {
+        font-size: 12px;
+    }
 }

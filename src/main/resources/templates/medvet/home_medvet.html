@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Home</title>
 
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container my-2">
+      <h1>Informação clientes</h1>
 
-</head>
-<body>
-
-<div class="container my-2">
-    <h1>Informação clientes</h1>
-
-    <table border="1" class = "table table-striped table-responsive-md">
+      <table border="1" class="table table-striped table-responsive-md">
         <thead>
-        <tr>
-            <th> Nome </th>
-            <th> Celular </th>
-            <th> Email </th>
-            <th> Actions </th>
-        </tr>
+          <tr>
+            <th>Nome</th>
+            <th>Celular</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-            <tr th:each="cliente : ${clienteInfos}">
-                <td th:text="${cliente.nome}"></td>
-                <td th:text="${cliente.celular}"></td>
-                <td th:text="${cliente.email}"></td>
-                <td>Update Delete </td>
-            </tr>
+          <tr th:each="cliente : ${clienteInfos}">
+            <td th:text="${cliente.nome}"></td>
+            <td th:text="${cliente.celular}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td>
+              <a th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cliente.id} + '/animais'}">
+                Ver Animais
+              </a>
+            </td>
+          </tr>
         </tbody>
-    </table>
-
-
-
-</div>
-</body>
+      </table>
+    </div>
+  </body>
 </html>

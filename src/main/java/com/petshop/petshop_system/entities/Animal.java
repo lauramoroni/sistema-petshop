@@ -14,11 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//sugestão para todas as classes: Validações com Jakarta Bean Validation. Validação em nível de aplicação antes de os dados serem enviados ao banco de dados. Isso ajuda a fornecer feedback ao usuário sobre entradas inválidas.
-
 @Data
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name="tb_animal")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +24,7 @@ public class Animal {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_animal")
-    private Long id;  //posteriormente devemos definir um padrão de id para o animal
+    private Long id; 
 
     @Column(nullable=false)
     private String nome;
@@ -39,11 +36,11 @@ public class Animal {
     private String Esterilizacao;
 
     @ManyToOne
-    @JoinColumn(name="cpf", nullable=false)
+    @JoinColumn(name="cpf")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "medvet_crmv", nullable = false)
+    @JoinColumn(name = "crmv")
     private MedVet medVet;  // Associação com o veterinário
 
 }

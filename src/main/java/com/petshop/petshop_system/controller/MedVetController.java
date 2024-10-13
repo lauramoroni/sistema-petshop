@@ -56,14 +56,6 @@ public class MedVetController {
 
     }
 
-    // Pagina de cadastro de animal
-    @GetMapping("/{crmv}/{id_cliente}")
-    public String formularioAnimal(@PathVariable String crmv, @PathVariable Long id_cliente, Model model) {
-        model.addAttribute("crmv", crmv);
-        model.addAttribute("id_cliente", id_cliente);
-        return "/medvet/form_animal";
-    }
-
     // Método para processar o formulário e cadastrar o animal
     @PostMapping("/{crmv}/{id_cliente}")
     public String insertAnimal(@PathVariable String crmv, @PathVariable String id_cliente, Animal animal) {

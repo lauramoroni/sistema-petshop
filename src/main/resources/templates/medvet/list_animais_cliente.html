@@ -32,7 +32,7 @@
     </table>
 
     <a th:href="@{'/veterinario/' + ${crmv}}">Voltar</a><br>
-    <a th:href="@{'/animal/cadastro'}">Novo animal</a>
+    <a th:href="@{'/animal/' + ${crmv} + '/cadastro/' + ${cpf}}">Novo animal</a>
 
 </div>
 </body>

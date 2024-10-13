@@ -15,7 +15,7 @@
             </div>
 
             <div>
-                <label for="sexo">Sexo:<s/label>
+                <label for="sexo">Sexo:</label>
                 <select id="sexo" name="sexo" th:field="*{sexo}" required>
                     <option value="" disabled selected>Selecione o sexo</option>
                     <option value="Macho">Macho</option>
@@ -44,20 +44,10 @@
             </div>
 
             <div>
-                <label for="medVet">Veterinário:</label>
-                <select id="medVet" name="crmv" required>
-                    <option value="" disabled selected>Selecione o veterinário</option>
-                    <tr th:each="vet : ${medVets}">
-                        <option th:value="${vet.crmv}" th:text="${vet.nome}"></option>
-                    </tr>
-                </select>
-            </div>
-
-            <div>
                 <button type="submit" class="btn btn-success">Cadastrar Animal</button>
             </div>
         </form>
-        <a href="#" th:href="@{/veterinario/{medVet.crmv}/cliente/{cliente.cpf}/animais}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
+        <a th:href="@{/veterinario/{medVets.crmv}/cliente/{cliente.cpf}/animais}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
     </div>
 </body>
 </html>

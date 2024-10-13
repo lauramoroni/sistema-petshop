@@ -42,15 +42,17 @@ public class AnimalController {
     }
 
     // Adicionar novo animal
-    @PostMapping("/{crmv}/cadastro") // Corrigido para POST em /cadastro
-    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @RequestParam String cpf, @RequestParam String crmv) {
+    @PostMapping("/{crmv}/cliente/{cpf}/animais")
+    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @PathVariable String cpf, @PathVariable String crmv) {
         // Configurar o cliente e o veterinário no animal antes de salvar
         Cliente cliente = clienteService.findByCPF(cpf);
-        MedVet medVet = medVetService.FindByCRMV(crmv); // Corrigido para findByCRMV
+        MedVet medVet = medVetService.FindByCRMV(crmv); 
         animal.setCliente(cliente);
         animal.setMedVet(medVet);
-
         animalService.insert(animal);
-        return "redirect:/veterinario/{crmv}/cliente/{id_cliente}/animais"; // Redireciona para a lista de animais
+
+        cliente.getAnimais().add(animal);
+
+        return "redirect:/veterinario/{crmv}/cliente/{cpf}/animais"; // Redireciona para a lista de animais
     }
 }

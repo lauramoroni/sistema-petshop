@@ -8,7 +8,7 @@
 <body>
     <div class="container my-2">
         <h1>Cadastro de Animal</h1>
-        <form th:action="@{/animal/cadastro}" th:object="${animal}" method="post"> <!-- Corrigido para /animal/cadastro -->
+        <form th:action="@{'/animal/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}" th:object="${animal}" method="post"> <!-- Corrigido para /animal/cadastro -->
             <div>
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" th:field="*{nome}" required />
@@ -27,19 +27,9 @@
                 <label for="esterilizacao">Esterilização:</label>
                 <select id="esterilizacao" name="esterilizacao" th:field="*{esterilizacao}" required>
                     <option value="" disabled selected>Selecione o estado de esterilização</option>
-                    <option value="Sim">Fértil</option>
-                    <option value="Não">Castrado</option>
-                    <option value="Não">Vasectomizado</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="cliente">Cliente:</label>
-                <select id="cliente" name="cpf" required>
-                    <option value="" disabled selected>Selecione o cliente</option>
-                    <tr th:each="cliente : ${clientes}">
-                        <option th:value="${cliente.cpf}" th:text="${cliente.nome}"></option>
-                    </tr>
+                    <option value="Fértil">Fértil</option>
+                    <option value="Castrado">Castrado</option>
+                    <option value="Vasectomizado">Vasectomizado</option>
                 </select>
             </div>
 
@@ -47,7 +37,7 @@
                 <button type="submit" class="btn btn-success">Cadastrar Animal</button>
             </div>
         </form>
-        <a th:href="@{/veterinario/{medVets.crmv}/cliente/{cliente.cpf}/animais}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
+        <a th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
     </div>
 </body>
 </html>

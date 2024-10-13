@@ -16,6 +16,7 @@
             <th>Nome</th>
             <th>Sexo</th>
             <th>Esterilização</th>
+            <th>Detalhes</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
             <td th:text="${animal.nome}"></td>
             <td th:text="${animal.sexo}"></td>
             <td th:text="${animal.Esterilizacao}"></td>
+            <td>
+                <a th:href="@{'/animal' + ${id_animal}}">Ver Detalhes</a> <!-- Link para detalhes -->
+            </td>
         </tr>
         </tbody>
     </table>

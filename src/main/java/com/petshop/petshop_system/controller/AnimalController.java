@@ -1,68 +1,55 @@
 package com.petshop.petshop_system.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import com.petshop.petshop_system.entities.Animal;
+import com.petshop.petshop_system.entities.Cliente;
+import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.services.AnimalService;
-
-import java.util.List;
+import com.petshop.petshop_system.services.ClienteService;
+import com.petshop.petshop_system.services.MedVetService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
-@RequestMapping("animal")
+@Controller
+@RequestMapping("/animal")
 public class AnimalController {
 
     @Autowired
     AnimalService animalService;
+    @Autowired
+    ClienteService clienteService;
+    @Autowired
+    MedVetService medVetService;
 
-    //@GetMapping
-    //public ResponseEntity<List<Animal>> getAll(){
-    //    List<Animal> listPessoa = animalService.findAll();
-    //    return ResponseEntity.ok().body(listPessoa);
-    //}
-    
-    @GetMapping("/list")
-    public String getAll(Model model) {
-        List<Animal> listAnimal = animalService.findAll();
-        model.addAttribute("animals", listAnimal);  // Adiciona a lista de animais ao modelo
-        return "animal_list";  // Retorna o nome do arquivo HTML a ser renderizado
+    // Formulário para adicionar um novo animal
+    @GetMapping("/cadastro")
+    public String criarAnimalForm(Model model) {
+        Animal novoAnimal = new Animal();
+        model.addAttribute("animal", novoAnimal);
+
+        // Adicionar listas de clientes e veterinários
+        model.addAttribute("clientes", clienteService.findAll());
+        model.addAttribute("medVets", medVetService.findAll());
+
+        return "animais/form_animal"; // Retorna a view do formulário
     }
 
-    @PostMapping
-    public ResponseEntity<Animal> insert(@RequestBody Animal animal) {
-        animal = animalService.insert(animal); 
-        return ResponseEntity.ok().body(animal);
-    }
+    // Adicionar novo animal
+    @PostMapping("/cadastro") // Corrigido para POST em /cadastro
+    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @RequestParam String cpf, @RequestParam String crmv) {
+        // Configurar o cliente e o veterinário no animal antes de salvar
+        Cliente cliente = clienteService.findByCPF(cpf);
+        MedVet medVet = medVetService.FindByCRMV(crmv); // Corrigido para findByCRMV
+        animal.setCliente(cliente);
+        animal.setMedVet(medVet);
 
-
-    // Método para buscar uma espécie por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Animal> getById(@PathVariable Long id) {
-        Animal Animal = animalService.findById(id);
-        return ResponseEntity.ok().body(Animal);
-    }
-
-    // Método para atualizar uma espécie existente
-    @PutMapping("/{id}")
-    public ResponseEntity<Animal> update(@PathVariable Long id, @RequestBody Animal animal) {
-        Animal updatedAnimal = animalService.update(id, animal);
-        return ResponseEntity.ok().body(updatedAnimal);
-    }
-
-    // Método para deletar uma espécie
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        animalService.delete(id);
-        return ResponseEntity.noContent().build();
+        animalService.insert(animal);
+        return "redirect:/veterinario/{crmv}/cliente/{id_cliente}/animais"; // Redireciona para a lista de animais
     }
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastro de Animal</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container my-2">
+        <h1>Cadastro de Animal</h1>
+        <form th:action="@{/animal/cadastro}" method="post"> <!-- Corrigido para /animal/cadastro -->
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" th:field="*{nome}" required />
+            </div>
+
+            <div>
+                <label for="sexo">Sexo:<s/label>
+                <select id="sexo" name="sexo" th:field="*{sexo}" required>
+                    <option value="" disabled selected>Selecione o sexo</option>
+                    <option value="Macho">Macho</option>
+                    <option value="Fêmea">Fêmea</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="esterilizacao">Esterilização:</label>
+                <select id="esterilizacao" name="esterilizacao" th:field="*{esterilizacao}" required>
+                    <option value="" disabled selected>Selecione o estado de esterilização</option>
+                    <option value="Sim">Fértil</option>
+                    <option value="Não">Castrado</option>
+                    <option value="Não">Vasectomizado</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="cliente">Cliente:</label>
+                <select id="cliente" name="cpf" required>
+                    <option value="" disabled selected>Selecione o cliente</option>
+                    <tr th:each="cliente : ${clientes}">
+                        <option th:value="${cliente.cpf}" th:text="${cliente.nome}"></option>
+                    </tr>
+                </select>
+            </div>
+
+            <div>
+                <label for="medVet">Veterinário:</label>
+                <select id="medVet" name="crmv" required>
+                    <option value="" disabled selected>Selecione o veterinário</option>
+                    <tr th:each="vet : ${medVets}">
+                        <option th:value="${vet.crmv}" th:text="${vet.nome}"></option>
+                    </tr>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-success">Cadastrar Animal</button>
+            </div>
+        </form>
+        <a href="#" th:href="@{/veterinario/{medVet.crmv}/cliente/{cliente.cpf}/animais}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
+    </div>
+</body>
+</html>

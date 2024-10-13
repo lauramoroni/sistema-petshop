@@ -13,8 +13,7 @@ import org.hibernate.annotations.Immutable;
 public class VwClienteInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String cpf;
 
     private String nome;
 

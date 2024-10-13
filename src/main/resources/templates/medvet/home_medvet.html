@@ -25,7 +25,7 @@
             <td th:text="${cliente.celular}"></td>
             <td th:text="${cliente.email}"></td>
             <td>
-              <a th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cliente.id} + '/animais'}">
+              <a th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cliente.cpf} + '/animais'}">
                 Ver Animais
               </a>
             </td>

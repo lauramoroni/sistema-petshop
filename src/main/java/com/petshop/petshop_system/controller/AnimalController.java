@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -58,8 +57,12 @@ public class AnimalController {
     }
     
     // Detalhe do animal
-    @GetMapping("{id_animal}")
-    public String detalhesAnimal(@PathVariable Long id_animal) {
+    @GetMapping("{crmv}/{id_animal}")
+    public String detalhesAnimal(Model model, @PathVariable Long id_animal, @PathVariable String crmv) {
+
+        model.addAttribute("animal", animalService.findById(id_animal));
+        model.addAttribute("medVets", medVetService.FindByCRMV(crmv));
+
         return "animais/detalhe_animal";
     }
     

@@ -1,1 +1,16 @@
-animal
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animais do Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="container my-2">
+    
+    <a th:href="@{'/exame/' + ${id_animal}}">Novo exame</a>
+
+</div>
+</body>
+</html>

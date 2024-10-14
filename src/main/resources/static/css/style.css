@@ -1,26 +1,26 @@
 /* Global Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef2f7;
+    background-color: #f7f0f8; /* Fundo rosa claro */
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #4a4a4a;
 }
 
 h1, h2 {
     text-align: center;
-    color: #333;
+    color: #4a4a4a;
     font-weight: 300;
     margin-top: 20px;
 }
 
 a {
     text-decoration: none;
-    color: #4CAF50;
+    color: #ff6fae; /* Rosa vibrante */
 }
 
 a:hover {
-    color: #3e8e41;
+    color: #ff4a94; /* Rosa mais escuro */
 }
 
 /* Container for Page Content */
@@ -47,7 +47,7 @@ th, td {
 }
 
 th {
-    background-color: #009688;
+    background-color: #8bbdd9; /* Azul pastel */
     color: white;
     font-size: 16px;
 }
@@ -58,11 +58,11 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #f7f7f7;
+    background-color: #fce4ec; /* Rosa muito claro */
 }
 
 tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f8bbd0; /* Rosa suave */
     cursor: pointer;
 }
 
@@ -71,7 +71,7 @@ form {
     width: 60%;
     margin: 20px auto;
     padding: 25px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid #ddd;
@@ -80,7 +80,7 @@ form {
 form label {
     display: block;
     margin-bottom: 10px;
-    color: #555;
+    color: #4a4a4a;
     font-weight: bold;
     font-size: 14px;
 }
@@ -101,7 +101,7 @@ form textarea {
 
 form button {
     width: 100%;
-    background-color: #009688;
+    background-color: #8bbdd9; /* Azul pastel */
     color: white;
     border: none;
     padding: 12px;
@@ -112,21 +112,21 @@ form button {
 }
 
 form button:hover {
-    background-color: #00796b;
+    background-color: #6fa0c3; /* Azul mais escuro */
 }
 
 /* Form Fields Focus Effect */
 form input:focus, form select:focus, form textarea:focus {
-    border-color: #009688;
+    border-color: #ff6fae; /* Rosa vibrante */
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
+    box-shadow: 0 0 5px rgba(255, 111, 174, 0.2);
 }
 
 /* Button Styling */
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #009688;
+    background-color: #ff6fae; /* Rosa vibrante */
     color: white;
     text-align: center;
     border-radius: 5px;
@@ -136,8 +136,47 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 .btn:hover {
-    background-color: #00796b;
+    background-color: #ff4a94; /* Rosa mais escuro */
 }
+
+/* Navbar Styling */
+.navbar {
+    background-color: #8bbdd9; /* Azul pastel */
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #6fa0c3; /* Azul mais escuro */
+}
+
+.navbar a.active {
+    background-color: #ff6fae; /* Rosa vibrante */
+}
+
+.navbar img {
+    height: 40px; /* Ajuste a altura da logo */
+    padding: 5px; /* Espaçamento entre a logo e o topo da barra */
+}
+
+/* Content Padding */
+.content {
+    padding-top: 60px;
+}
+
 @media (max-width: 768px) {
     form {
         width: 90%;
@@ -147,38 +186,3 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 12px;
     }
 }
-.navbar {
-    background-color: #009688;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
-  .navbar a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  .navbar a:hover {
-    background-color: #00796b;
-  }
-
-  .navbar a.active {
-    background-color: #004d40;
-  }
-
-  .navbar img {
-    height: 40px; /* Ajuste a altura da logo */
-    padding: 5px; /* Espaçamento entre a logo e o topo da barra */
-  }
-
-  .content {
-    padding-top: 60px; 
-  }

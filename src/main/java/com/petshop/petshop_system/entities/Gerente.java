@@ -16,11 +16,11 @@ import java.util.UUID;
 public class Gerente extends Pessoa{
 
     @Column(unique = true, nullable = false, length = 11)
-    private UUID id;
+    private String login;
 
     @Builder
-    public Gerente(String cpf, String nome, String celular, String telefone, String email, Endereco endereco, String login, String senha, UUID id) {
+    public Gerente(String cpf, String nome, String celular, String telefone, String email, Endereco endereco, String login, String senha) {
         super(cpf, nome, celular, telefone, email, endereco, login, senha);
-        this.id = id;
+        this.login = login;
     }
 }

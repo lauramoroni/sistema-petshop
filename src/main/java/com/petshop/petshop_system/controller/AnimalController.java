@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/animal")
@@ -56,4 +58,9 @@ public class AnimalController {
     }
     
     // Detalhe do animal
+    @GetMapping("{id_animal}")
+    public String detalhesAnimal(@PathVariable Long id_animal) {
+        return "animais/detalhe_animal";
+    }
+    
 }

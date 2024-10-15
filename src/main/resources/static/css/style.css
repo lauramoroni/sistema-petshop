@@ -1,33 +1,26 @@
 /* Global Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #3D669C; /* Fundo azul */
+    background-color: #eef2f7;
     margin: 0;
     padding: 0;
-    color: #fff; /* Texto branco para contraste */
+    color: #333;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
-    color: #fff; /* Texto branco */
-    font-weight: 300;
-    margin-top: 20px;
-}
-
-h2 {
-    text-align: center;
-    color: #000000; /* Texto preto */
+    color: #333;
     font-weight: 300;
     margin-top: 20px;
 }
 
 a {
     text-decoration: none;
-    color: #ff6fae; /* Rosa vibrante */
+    color: #4CAF50;
 }
 
 a:hover {
-    color: #ff4a94; /* Rosa mais escuro */
+    color: #3e8e41;
 }
 
 /* Container for Page Content */
@@ -42,7 +35,7 @@ table {
     width: 100%;
     margin: 20px 0;
     border-collapse: collapse;
-    background-color: #fff; /* Fundo branco para as tabelas */
+    background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -54,22 +47,22 @@ th, td {
 }
 
 th {
-    background-color: #6B1611; /* Cor base da paleta */
-    color: white; /* Texto branco */
+    background-color: #009688;
+    color: white;
     font-size: 16px;
 }
 
 td {
-    color: #555; /* Cinza escuro */
+    color: #555;
     font-size: 14px;
 }
 
 tr:nth-child(even) {
-    background-color: #fce4ec; /* Rosa muito claro */
+    background-color: #f7f7f7;
 }
 
 tr:hover {
-    background-color: #f8bbd0; /* Rosa suave */
+    background-color: #f1f1f1;
     cursor: pointer;
 }
 
@@ -78,7 +71,7 @@ form {
     width: 60%;
     margin: 20px auto;
     padding: 25px;
-    background-color: #ffffff; /* Fundo branco */
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid #ddd;
@@ -87,7 +80,7 @@ form {
 form label {
     display: block;
     margin-bottom: 10px;
-    color: #4a4a4a;
+    color: #555;
     font-weight: bold;
     font-size: 14px;
 }
@@ -108,8 +101,8 @@ form textarea {
 
 form button {
     width: 100%;
-    background-color: #6B1611; /* Cor base da paleta */
-    color: white; /* Texto branco */
+    background-color: #009688;
+    color: white;
     border: none;
     padding: 12px;
     font-size: 16px;
@@ -119,22 +112,22 @@ form button {
 }
 
 form button:hover {
-    background-color: #8b2a26; /* Um tom mais claro do vermelho */
+    background-color: #00796b;
 }
 
 /* Form Fields Focus Effect */
 form input:focus, form select:focus, form textarea:focus {
-    border-color: #ff6fae; /* Rosa vibrante */
+    border-color: #009688;
     outline: none;
-    box-shadow: 0 0 5px rgba(255, 111, 174, 0.2);
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
 }
 
 /* Button Styling */
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ff6fae; /* Rosa vibrante */
-    color: white; /* Texto branco */
+    background-color: #009688;
+    color: white;
     text-align: center;
     border-radius: 5px;
     font-size: 14px;
@@ -143,30 +136,52 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 .btn:hover {
-    background-color: #ff4a94; /* Rosa mais escuro */
+    background-color: #00796b;
 }
-
-/* Navbar Styling */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+}
 .navbar {
-    background-color: #6B1611; /* Cor base da paleta */
+    background-color: #009688;
     overflow: hidden;
     position: fixed;
     top: 0;
     width: 100%;
-    height: 65px;
     z-index: 1000;
-}
+  }
 
-.navbar a {
+  .navbar a {
     float: left;
     display: block;
-    color: white; /* Texto branco */
+    color: white;
     text-align: center;
-    height: 65px;
     padding: 14px 20px;
     text-decoration: none;
     font-size: 17px;
-}
+  }
+
+  .navbar a:hover {
+    background-color: #00796b;
+  }
+
+  .navbar a.active {
+    background-color: #004d40;
+  }
+
+  .navbar img {
+    height: 40px; /* Ajuste a altura da logo */
+    padding: 5px; /* Espaçamento entre a logo e o topo da barra */
+  }
+
+  .content {
+    padding-top: 60px; 
+  }
 
 .navbar .logo {
     display: inline-block; /* Permite definir dimensões */
@@ -176,24 +191,6 @@ form input:focus, form select:focus, form textarea:focus {
     background-size: 60px; /* Ajusta a imagem para caber na tag */
     background-repeat: no-repeat; /* Não repete a imagem */
     padding: 0; /* Remove o padding */
-}
-
-.navbar a:hover {
-    background-color: #8b2a26; /* Um tom mais claro do vermelho */
-}
-
-.navbar a.active {
-    background-color: #ff6fae; /* Rosa vibrante */
-}
-
-.navbar img {
-    height: 40px; /* Ajuste a altura da logo */
-    padding: 0%; /* Espaçamento entre a logo e o topo da barra */
-}
-
-/* Content Padding */
-.content {
-    padding-top: 60px;
 }
 
 @media (max-width: 768px) {

@@ -15,13 +15,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name="tb_animal")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Animal {
     
     @Id
@@ -37,6 +41,9 @@ public class Animal {
 
     @Column(nullable=false)
     private String Esterilizacao;
+
+    @Column
+    private String status;
 
     @ManyToOne
     @JoinColumn(name="cpf")

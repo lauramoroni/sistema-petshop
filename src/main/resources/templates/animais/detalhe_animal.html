@@ -21,8 +21,12 @@
         <h1>Detalhes do Animal: <span th:text="${animal.nome}"></span></h1>
 
         <a class="btn" th:href="@{'/exame/' + ${crmv} + '/' + ${id_animal}}">Novo Exame</a>
-        <a class="btn" th:href="@{'/animal/uti'}">Internar animal</a>
-
+        <form class="btn" th:action="@{'/animal/uti'}" method="post">
+            <input type="hidden" name="id_animal" th:value="${id_animal}" />
+            <input type="hidden" name="crmv" th:value="${crmv}" />
+            <button type="submit" class="btn">Internar animal</button>
+        </form>
+        
         <h2>Hemogramas Realizados:</h2>
         <ul>
             <li th:each="hemograma : ${hemogramas}">

@@ -2,12 +2,14 @@ package com.petshop.petshop_system.controller;
 
 import com.petshop.petshop_system.entities.Animal;
 import com.petshop.petshop_system.entities.Cliente;
-import com.petshop.petshop_system.entities.Internados;
+import com.petshop.petshop_system.entities.Internacao;
 import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.services.AnimalService;
 import com.petshop.petshop_system.services.ClienteService;
-import com.petshop.petshop_system.services.InternadosService;
 import com.petshop.petshop_system.services.MedVetService;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/animal")
 public class AnimalController {
@@ -30,8 +31,6 @@ public class AnimalController {
     ClienteService clienteService;
     @Autowired
     MedVetService medVetService;
-    @Autowired
-    InternadosService internadosService;
 
     // Formulário para adicionar um novo animal
     @GetMapping("/{crmv}/cadastro/{cpf}")
@@ -76,15 +75,49 @@ public class AnimalController {
         // Adiciona o animal e a lista de hemogramas ao modelo
         model.addAttribute("animal", animal);
         model.addAttribute("hemogramas", animal.getHemogramas());
-        
-        return "animais/detalhe_animal"; 
+
+        return "animais/detalhe_animal";
     }
 
     // Animais internados
-    @GetMapping("/uti")
-    public String animaisInternadosList() {
+    @GetMapping("/uti/")
+    public String animaisInternadosForm(@RequestParam Long id_animal, @RequestParam String crmv, Model model) {
 
-        return "animais/internados_list";
+        Animal animal = animalService.findById(id_animal);
+        Internacao internacao = new Internacao();
+        MedVet medVet = medVetService.FindByCRMV(crmv);
+
+        internacao.setAnimal(animal);
+
+        model.addAttribute("internacao", internacao);
+        model.addAttribute("animal", animal);
+        model.addAttribute("veterinarioNome", medVet.getNome());
+
+        return "animais/internados_form";
     }
-    
+
+    @PostMapping("/uti/")
+    public String internarAnimal(@RequestParam Long animalId, @RequestParam String crmv, Model model) {
+        Animal animal = animalService.findById(animalId);
+        MedVet medVet = medVetService.FindByCRMV(crmv);
+        Internacao internacao = new Internacao();
+
+        animal.setStatus("internado");
+        animalService.update(animalId, animal);
+
+        model.addAttribute("veterinarioNome", medVet.getNome()); 
+        model.addAttribute("internacao", internacao);
+
+        return "redirect:animal/uti/" + animalId; // redireciona para o formulário de internação
+    }
+
+
+    @PostMapping("/uti/save")
+    public String salvarInternacao(@ModelAttribute Internacao internacao) {
+        internacao.setData_internacao(LocalDateTime.now()); // define a data de internação
+
+        return "redirect:/animal/uti"; // redireciona para a lista de animais internados
+    }
+
+
 }

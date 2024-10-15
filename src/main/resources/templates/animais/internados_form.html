@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Internação de Animal</title>
+</head>
+<body>
+
+    <form th:action="@{/animal/uti/}" th:object="${internacao}" method="post">
+        <input type="hidden" th:value="${id_animal}" name="id_animal"/>
+
+        <label for="veterinario">Veterinário:</label>
+        <span th:text="${veterinarioNome}"></span> <!-- Aqui é exibido o nome do veterinário -->
+
+        <label for="complicacao">Complicação:</label>
+        <textarea id="complicacao" name="complicacao" th:value="*{complicacao}" placeholder="Descreva a complicação"></textarea>
+
+        <label for="nivel_urgencia">Nível de Urgência:</label>
+        <select id="nivel_urgencia" name="nivel_urgencia" th:value="*{nivel_urgencia}" required>
+            <option value="1">Baixa</option>
+            <option value="2">Moderada</option>
+            <option value="3">Alta</option>
+            <option value="4">Crítica</option>
+        </select>
+
+        <button type="submit">Salvar Internação</button>
+    </form>
+
+</body>
+</html>

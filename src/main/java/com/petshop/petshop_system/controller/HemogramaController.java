@@ -64,10 +64,5 @@ public class HemogramaController {
         model.addAttribute("error", "Animal ou Veterinário não encontrados.");
         return "animais/exame_form";
     }
-
-    @GetMapping("teste")
-    public String getMethodName() {
-        return "animais/teste";
-    }
     
 }

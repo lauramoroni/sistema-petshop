@@ -2,9 +2,11 @@ package com.petshop.petshop_system.controller;
 
 import com.petshop.petshop_system.entities.Animal;
 import com.petshop.petshop_system.entities.Cliente;
+import com.petshop.petshop_system.entities.Internados;
 import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.services.AnimalService;
 import com.petshop.petshop_system.services.ClienteService;
+import com.petshop.petshop_system.services.InternadosService;
 import com.petshop.petshop_system.services.MedVetService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/animal")
@@ -26,6 +30,8 @@ public class AnimalController {
     ClienteService clienteService;
     @Autowired
     MedVetService medVetService;
+    @Autowired
+    InternadosService internadosService;
 
     // Formulário para adicionar um novo animal
     @GetMapping("/{crmv}/cadastro/{cpf}")
@@ -74,4 +80,11 @@ public class AnimalController {
         return "animais/detalhe_animal"; 
     }
 
+    // Animais internados
+    @GetMapping("/uti")
+    public String animaisInternadosList() {
+
+        return "animais/internados_list";
+    }
+    
 }

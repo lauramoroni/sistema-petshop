@@ -34,4 +34,17 @@ public class ItemService {
     public Item insert(Item item) {
         return itemRepository.save(item);
     }
+
+    public Item update(Item item, Long id) {
+        Item itemUpdated = itemRepository.findById(id).orElse(null);
+        itemUpdated.setNome(item.getNome());
+        itemUpdated.setDescrição(item.getDescrição());
+        itemUpdated.setPreco(item.getPreco());
+        itemUpdated.setQuantidade(item.getQuantidade());
+        return itemRepository.save(itemUpdated);
+    }
+
+    public void delete(Long id){
+        itemRepository.deleteById(id);
+    }
 }

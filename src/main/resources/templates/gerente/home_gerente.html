@@ -78,6 +78,26 @@
         .stats div h3 {
             margin: 0;
         }
+        }
+        .btn {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-update {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .btn-desconto {
+            background-color: #ffc107;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -198,7 +218,19 @@
                     <form th:action="@{/item/aplicar-desconto}" method="post">
                         <input type="hidden" th:value="${item.getId()}" name="itemId"/>
                         <input type="number" name="percentualDesconto" min="0" max="100"/>
-                        <button type="submit">Aplicar Desconto</button>
+                        <button class="btn btn-desconto" type="submit">Aplicar Desconto</button>
+                    </form>
+                </td>
+                <td>
+                <form th:action="@{/item/atualizar}" method="get">
+                    <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                    <button type="submit" class="btn btn-update"><i class="fas fa-edit"></i> Atualizar</button>
+                </form>
+                </td>
+                <td>
+                    <form th:action="@{/item/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este item?');">
+                        <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                        <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i> Deletar</button>
                     </form>
                 </td>
             </tr>

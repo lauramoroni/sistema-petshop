@@ -28,8 +28,7 @@ public class ItemController {
     @PostMapping("/cadastro")
     public String salvarItem(@ModelAttribute Item item) {
         itemService.insert(item);
-
-        return "/gerente/home_gerente";
+        return "redirect:/gerente/home";
 
     }
 
@@ -38,5 +37,25 @@ public class ItemController {
         itemService.aplicarDesconto(itemId, percentualDesconto);
         return "redirect:/gerente/home";
     }
+
+    @GetMapping("/atualizar")
+    public String atualizar(@RequestParam Long itemId, Model model) {
+        model.addAttribute("item", itemService.findById(itemId));
+        return "/gerente/item_update";
+    }
+
+    @PostMapping("/atualizar")
+    public String atualizarItem(@ModelAttribute Item item, @RequestParam Long itemId) {
+        itemService.update(item, itemId);
+        return "redirect:/gerente/home";
+
+    }
+
+    @PostMapping("/deletar")
+    public String deletarItem(@RequestParam Long itemId) {
+        itemService.delete(itemId);
+        return "redirect:/gerente/home";
+    }
+
 
 }

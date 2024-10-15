@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping("/animal")
 public class AnimalController {
@@ -43,10 +42,11 @@ public class AnimalController {
 
     // Adicionar novo animal
     @PostMapping("/{crmv}/cliente/{cpf}/animais")
-    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @PathVariable String cpf, @PathVariable String crmv) {
+    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @PathVariable String cpf,
+            @PathVariable String crmv) {
         // Configurar o cliente e o veterinário no animal antes de salvar
         Cliente cliente = clienteService.findByCPF(cpf);
-        MedVet medVet = medVetService.FindByCRMV(crmv); 
+        MedVet medVet = medVetService.FindByCRMV(crmv);
         animal.setCliente(cliente);
         animal.setMedVet(medVet);
         animalService.insert(animal);
@@ -55,17 +55,23 @@ public class AnimalController {
 
         return "redirect:/veterinario/{crmv}/cliente/{cpf}/animais"; // Redireciona para a lista de animais
     }
-    
+
     // Detalhe do animal
-    @GetMapping("{crmv}/{id_animal}")
-    public String detalhesAnimal(Model model, @PathVariable Long id_animal, @PathVariable String crmv) {
+    @GetMapping("/{crmv}/{id_animal}")
+    public String detalhesAnimal(@PathVariable Long id_animal, @PathVariable String crmv, Model model) {
+        Animal animal = animalService.findById(id_animal);
 
-        model.addAttribute("animal", animalService.findById(id_animal));
-        model.addAttribute("medVets", medVetService.FindByCRMV(crmv));
+        // Verifica se o animal existe
+        if (animal == null) {
+            model.addAttribute("error", "Animal não encontrado.");
+            return "animais/error"; // Ou alguma outra página de erro
+        }
 
-        return "animais/detalhe_animal";
+        // Adiciona o animal e a lista de hemogramas ao modelo
+        model.addAttribute("animal", animal);
+        model.addAttribute("hemogramas", animal.getHemogramas());
+        
+        return "animais/detalhe_animal"; 
     }
 
-    
-    
 }

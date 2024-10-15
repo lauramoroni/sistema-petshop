@@ -2,15 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Animais do Cliente</title>
+    <title>Detalhes do Animal</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 
-<div class="container my-2">
-    
-    <a th:href="@{'/exame/' + ${crmv} + '/' + ${id_animal}}">Novo exame</a>
+    <div class="navbar"> 
+        <a href="/home" class="logo"></a>
+        <a href="/home">Home</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/animais">Animais</a>
+        <a href="/veterinarios">Veterinários</a>
+        <a href="/consultas" class="active">Consultas</a>
+      </div>
 
+<div class="content">
+    <div class="container my-2">
+        <h1>Detalhes do Animal: <span th:text="${animal.nome}"></span></h1>
+
+        <a class="btn" th:href="@{'/exame/' + ${crmv} + '/' + ${id_animal}}">Novo Exame</a>
+
+        <h2>Hemogramas Realizados:</h2>
+        <ul>
+            <li th:each="hemograma : ${hemogramas}">
+                <div class="hemograma-card">
+                    <h3>Ficha: <span th:text="${hemograma.id_hemograma}"></span></h3>
+                    <p><strong>Hemácias:</strong> <span th:text="${hemograma.hemacias}"></span></p>
+                    <p><strong>Hematócrito:</strong> <span th:text="${hemograma.hematocrito}"></span></p>
+                    <p><strong>Hemoglobina:</strong> <span th:text="${hemograma.hemoglobina}"></span></p>
+                    <p><strong>Leucócitos:</strong> <span th:text="${hemograma.leucocitos}"></span></p>
+                    <p><strong>Linfócitos:</strong> <span th:text="${hemograma.linfocitos}"></span></p>
+                    <p><strong>Plaquetas:</strong> <span th:text="${hemograma.plaquetas}"></span></p>
+                    <p><strong>Observações:</strong> <span th:text="${hemograma.observacoes}"></span></p>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
+
 </body>
 </html>

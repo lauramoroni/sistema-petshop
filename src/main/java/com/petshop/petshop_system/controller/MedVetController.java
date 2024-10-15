@@ -93,6 +93,7 @@ public class MedVetController {
 
         model.addAttribute("animais", animais);
         model.addAttribute("cliente", cliente);
+        model.addAttribute("crmv", crmv); 
 
         return "medvet/list_animais_cliente";
     }

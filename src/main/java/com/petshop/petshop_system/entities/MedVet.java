@@ -1,6 +1,6 @@
 package com.petshop.petshop_system.entities;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_medvet")
 public class MedVet extends Pessoa{
 
-    @Id
     @Column(unique = true, nullable = false, length = 11)
     private String crmv;
 

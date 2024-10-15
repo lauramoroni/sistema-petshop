@@ -1,15 +1,22 @@
 /* Global Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f7f0f8; /* Fundo rosa claro */
+    background-color: #3D669C; /* Fundo azul */
     margin: 0;
     padding: 0;
-    color: #4a4a4a;
+    color: #fff; /* Texto branco para contraste */
 }
 
-h1, h2 {
+h1 {
     text-align: center;
-    color: #4a4a4a;
+    color: #fff; /* Texto branco */
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #000000; /* Texto preto */
     font-weight: 300;
     margin-top: 20px;
 }
@@ -35,7 +42,7 @@ table {
     width: 100%;
     margin: 20px 0;
     border-collapse: collapse;
-    background-color: #fff;
+    background-color: #fff; /* Fundo branco para as tabelas */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -47,13 +54,13 @@ th, td {
 }
 
 th {
-    background-color: #8bbdd9; /* Azul pastel */
-    color: white;
+    background-color: #6B1611; /* Cor base da paleta */
+    color: white; /* Texto branco */
     font-size: 16px;
 }
 
 td {
-    color: #555;
+    color: #555; /* Cinza escuro */
     font-size: 14px;
 }
 
@@ -71,7 +78,7 @@ form {
     width: 60%;
     margin: 20px auto;
     padding: 25px;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Fundo branco */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid #ddd;
@@ -101,8 +108,8 @@ form textarea {
 
 form button {
     width: 100%;
-    background-color: #8bbdd9; /* Azul pastel */
-    color: white;
+    background-color: #6B1611; /* Cor base da paleta */
+    color: white; /* Texto branco */
     border: none;
     padding: 12px;
     font-size: 16px;
@@ -112,7 +119,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #6fa0c3; /* Azul mais escuro */
+    background-color: #8b2a26; /* Um tom mais claro do vermelho */
 }
 
 /* Form Fields Focus Effect */
@@ -127,7 +134,7 @@ form input:focus, form select:focus, form textarea:focus {
     display: inline-block;
     padding: 10px 20px;
     background-color: #ff6fae; /* Rosa vibrante */
-    color: white;
+    color: white; /* Texto branco */
     text-align: center;
     border-radius: 5px;
     font-size: 14px;
@@ -141,7 +148,7 @@ form input:focus, form select:focus, form textarea:focus {
 
 /* Navbar Styling */
 .navbar {
-    background-color: #8bbdd9; /* Azul pastel */
+    background-color: #6B1611; /* Cor base da paleta */
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -152,7 +159,7 @@ form input:focus, form select:focus, form textarea:focus {
 .navbar a {
     float: left;
     display: block;
-    color: white;
+    color: white; /* Texto branco */
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
@@ -160,7 +167,7 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 .navbar a:hover {
-    background-color: #6fa0c3; /* Azul mais escuro */
+    background-color: #8b2a26; /* Um tom mais claro do vermelho */
 }
 
 .navbar a.active {

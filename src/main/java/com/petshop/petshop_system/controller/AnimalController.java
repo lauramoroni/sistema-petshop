@@ -65,5 +65,7 @@ public class AnimalController {
 
         return "animais/detalhe_animal";
     }
+
+    
     
 }

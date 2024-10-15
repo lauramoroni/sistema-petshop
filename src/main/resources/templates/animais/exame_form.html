@@ -8,7 +8,7 @@
 <body>
     <div class="container my-2">
         <h1>Hemograma</h1>
-        <form th:action="@{'/exame/' + ${animal.id}}" th:object="${hemograma}" method="post">
+        <form th:action="@{'/exame/' + ${medVet.crmv} + '/' + ${animal.id}}" th:object="${hemograma}" method="post">
             <h2 th:text="'Cadastrar Hemograma para ' + ${animal.nome}"></h2>
 
             <label for="hemacias">Hemácias:</label>
@@ -31,10 +31,6 @@
 
             <label for="observacoes">Observações:</label>
             <input type="text" id="observacoes" th:field="*{observacoes}" />
-
-            <!-- Campo para o CRMV -->
-            <label for="crmv">CRMV do Veterinário:</label>
-            <input type="text" id="crmv" name="crmv" required />
         
             <button type="submit">Salvar Exame</button>
         </form>

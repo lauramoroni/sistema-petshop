@@ -12,7 +12,6 @@ import com.petshop.petshop_system.services.AnimalService;
 import com.petshop.petshop_system.services.HemogramaService;
 import com.petshop.petshop_system.services.MedVetService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -27,31 +26,33 @@ public class HemogramaController {
     MedVetService medVetService;
 
     // Página de adicionar um hemograma
-    @GetMapping("/{id_animal}")
-    public String formularioCadastro(@PathVariable Long id_animal, Model model) {
+    @GetMapping("/{crmv}/{id_animal}")
+    public String formularioCadastro(@PathVariable Long id_animal,  @PathVariable String crmv, Model model) {
 
         Animal animal = animalService.findById(id_animal);
+        MedVet medVet = medVetService.FindByCRMV(crmv);
 
         model.addAttribute("animal", animal); 
+        model.addAttribute("medVet", medVet); 
         model.addAttribute("hemograma", new Hemograma());
 
         return "animais/exame_form"; 
     }
 
     // Método para processar o formulário do hemograma
-    @PostMapping("/{id_animal}")
-    public String salvarExame(@PathVariable Long id_animal, @ModelAttribute("hemograma") Hemograma hemograma, @RequestParam String crmv, Model model) {
+    @PostMapping("/{crmv}/{id_animal}")
+    public String salvarExame(@PathVariable Long id_animal, @ModelAttribute("hemograma") Hemograma hemograma, @PathVariable String crmv, Model model) {
     
         Animal animal = animalService.findById(id_animal);
         MedVet medvet = medVetService.FindByCRMV(crmv);
-
+        
         if (animal != null && medvet != null) {
             // Associa o hemograma ao animal e ao veterinário
             hemograma.setAnimal(animal);
-            
-            // Salva o hemograma
-            hemogramaService.insert(hemograma);
+            hemograma.setMedVet(medvet);
 
+            hemogramaService.insert(hemograma);
+            
             // Adiciona o hemograma à lista de hemogramas do animal
             animal.getHemogramas().add(hemograma);
 

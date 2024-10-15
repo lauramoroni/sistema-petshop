@@ -1,6 +1,9 @@
 package com.petshop.petshop_system.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.aspectj.weaver.patterns.ArgsAnnotationPointcut;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,6 +49,6 @@ public class Animal {
     private MedVet medVet;  // Associação com o veterinário
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
-    private List<Hemograma> hemogramas;
+    private List<Hemograma> hemogramas = new ArrayList<>();
 
 }

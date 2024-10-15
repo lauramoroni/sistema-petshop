@@ -1,6 +1,7 @@
 
 package com.petshop.petshop_system.entities;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -36,6 +37,6 @@ public class Item {
 
     private int quantidade;
 
-    private double preco;
+    private BigDecimal preco;
 
 }

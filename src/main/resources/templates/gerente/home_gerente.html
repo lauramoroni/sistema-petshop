@@ -195,7 +195,11 @@
                 <td th:text="${item.getQuantidade()}"></td>
                 <td th:text="${item.getPreco()}"></td>
                 <td>
-                    <a>Atribuir desconto</a> <!-- Link para detalhes -->
+                    <form th:action="@{/item/aplicar-desconto}" method="post">
+                        <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                        <input type="number" name="percentualDesconto" min="0" max="100"/>
+                        <button type="submit">Aplicar Desconto</button>
+                    </form>
                 </td>
             </tr>
 

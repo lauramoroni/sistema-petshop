@@ -28,11 +28,15 @@ public class GerenteController {
     @PostMapping("/login")
     public String logar(Model model, @RequestParam String login, @RequestParam String senha) {
         Gerente gerente = gerenteService.findByLogin(login);
-        model.addAttribute("itemList", itemService.findAll());
-
         // Criar lógica para o login
 
-        return "gerente/home_gerente";
+        return "redirect:/gerente/home";
 
+    }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("itemList", itemService.findAll());
+        return "/gerente/home_gerente";
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,14 @@ public class ItemService {
 
     public List<Item> findAll() {
         return itemRepository.findAll();
+    }
+
+    public Item findById(Long id) {
+        return itemRepository.findById(id).orElse(null);
+    }
+
+     public void aplicarDesconto(Long itemId, BigDecimal percentualDesconto) {
+        itemRepository.aplicarDesconto(itemId, percentualDesconto);
     }
 
     public Item insert(Item item) {

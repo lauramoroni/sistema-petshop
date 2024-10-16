@@ -1,6 +1,7 @@
 package com.petshop.petshop_system.controller;
 
 import com.petshop.petshop_system.entities.Gerente;
+import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.services.ItemService;
 import org.springframework.ui.Model;
 import com.petshop.petshop_system.services.GerenteService;
@@ -29,8 +30,12 @@ public class GerenteController {
     public String logar(Model model, @RequestParam String login, @RequestParam String senha) {
         Gerente gerente = gerenteService.findByLogin(login);
         // Criar lógica para o login
-
-        return "redirect:/gerente/home";
+        if (gerente != null) {
+            return "redirect:/gerente/home"; // Redireciona para a página do veterinário com a lista dos animais
+        } else {
+            model.addAttribute("error", "Login ou senha inválidos");
+            return "redirect:/gerente/login"; // Retorna para o login com erro
+        }
 
     }
 
@@ -39,4 +44,11 @@ public class GerenteController {
         model.addAttribute("itemList", itemService.findAll());
         return "/gerente/home_gerente";
     }
+
+
+
+
+
+
+    
 }

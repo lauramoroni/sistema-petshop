@@ -2,14 +2,10 @@ package com.petshop.petshop_system.controller;
 
 import com.petshop.petshop_system.entities.Animal;
 import com.petshop.petshop_system.entities.Cliente;
-import com.petshop.petshop_system.entities.Internacao;
 import com.petshop.petshop_system.entities.MedVet;
 import com.petshop.petshop_system.services.AnimalService;
 import com.petshop.petshop_system.services.ClienteService;
 import com.petshop.petshop_system.services.MedVetService;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +28,14 @@ public class AnimalController {
     @Autowired
     MedVetService medVetService;
 
+    // Home do animal (onde terá do CRUD)
+    @GetMapping("")
+    public String home() {
+        return "animais/home_animal";
+    }
+
+    // CRUD
+
     // Formulário para adicionar um novo animal
     @GetMapping("/{crmv}/cadastro/{cpf}")
     public String criarAnimalForm(Model model, @PathVariable String crmv, @PathVariable String cpf) {
@@ -42,7 +46,7 @@ public class AnimalController {
         model.addAttribute("clientes", clienteService.findByCPF(cpf));
         model.addAttribute("medVets", medVetService.FindByCRMV(crmv));
 
-        return "animais/form_animal"; // Retorna a view do formulário
+        return "/animais/form_animal"; // Retorna a view do formulário
     }
 
     // Adicionar novo animal
@@ -61,6 +65,26 @@ public class AnimalController {
         return "redirect:/veterinario/{crmv}/cliente/{cpf}/animais"; // Redireciona para a lista de animais
     }
 
+    @GetMapping("/atualizar")
+    public String atualizar(@RequestParam Long id_animal, Model model) {
+        model.addAttribute("animal", animalService.findById(id_animal));
+        return "/animais/animal_update";
+    }
+
+    @PostMapping("/atualizar")
+    public String atualizarItem(@ModelAttribute Animal animal, @RequestParam Long id_animal, @RequestParam String crmv) {
+        animalService.update(id_animal, animal);
+        return "redirect:/veterinario/" + crmv;
+
+    }
+
+    @PostMapping("/deletar")
+    public String deletarItem(@RequestParam Long id_animal, @RequestParam String crmv) {
+        animalService.delete(id_animal);
+       
+        return "redirect:/veterinario/" + crmv;
+    }
+
     // Detalhe do animal
     @GetMapping("/{crmv}/{id_animal}")
     public String detalhesAnimal(@PathVariable Long id_animal, @PathVariable String crmv, Model model) {
@@ -76,48 +100,7 @@ public class AnimalController {
         model.addAttribute("animal", animal);
         model.addAttribute("hemogramas", animal.getHemogramas());
 
-        return "animais/detalhe_animal";
+        return "animais/animal_detail";
     }
-
-    // Animais internados
-    @GetMapping("/uti/")
-    public String animaisInternadosForm(@RequestParam Long id_animal, @RequestParam String crmv, Model model) {
-
-        Animal animal = animalService.findById(id_animal);
-        Internacao internacao = new Internacao();
-        MedVet medVet = medVetService.FindByCRMV(crmv);
-
-        internacao.setAnimal(animal);
-
-        model.addAttribute("internacao", internacao);
-        model.addAttribute("animal", animal);
-        model.addAttribute("veterinarioNome", medVet.getNome());
-
-        return "animais/internados_form";
-    }
-
-    @PostMapping("/uti/")
-    public String internarAnimal(@RequestParam Long animalId, @RequestParam String crmv, Model model) {
-        Animal animal = animalService.findById(animalId);
-        MedVet medVet = medVetService.FindByCRMV(crmv);
-        Internacao internacao = new Internacao();
-
-        animal.setStatus("internado");
-        animalService.update(animalId, animal);
-
-        model.addAttribute("veterinarioNome", medVet.getNome()); 
-        model.addAttribute("internacao", internacao);
-
-        return "redirect:animal/uti/" + animalId; // redireciona para o formulário de internação
-    }
-
-
-    @PostMapping("/uti/save")
-    public String salvarInternacao(@ModelAttribute Internacao internacao) {
-        internacao.setData_internacao(LocalDateTime.now()); // define a data de internação
-
-        return "redirect:/animal/uti"; // redireciona para a lista de animais internados
-    }
-
 
 }

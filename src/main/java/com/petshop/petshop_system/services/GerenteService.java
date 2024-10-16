@@ -19,12 +19,12 @@ public class GerenteService {
         return gerenteRepository.save(gerente);
     }
 
-    public Gerente findById(String id) {
-        return gerenteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
+    public Gerente findByLogin(String login) {
+        return gerenteRepository.findGerenteByLogin(login);
     }
 
     public Gerente update( Gerente gerente, String id){
-        Gerente gerenteUpdate = findById(id);
+        Gerente gerenteUpdate = findByLogin(id);
         gerenteUpdate.setCelular(gerenteUpdate.getCelular());
         gerenteUpdate.setNome(gerenteUpdate.getNome());
         gerenteUpdate.setEmail(gerenteUpdate.getEmail());

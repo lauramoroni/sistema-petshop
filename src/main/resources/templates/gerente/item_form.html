@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastro de Animal</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container my-2">
+    <h1>Cadastro de Item</h1>
+    <form th:action="@{'/item/cadastro'}" th:object="${item}" method="post"> <!-- Corrigido para /animal/cadastro -->
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" th:field="*{nome}" required />
+        </div>
+
+        <div>
+            <label for="descricao">Descrição do produto:</label>
+            <input type="text" id="descricao" name="descricao" th:field="*{descrição}" required />
+        </div>
+
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" th:field="*{quantidade}" required />
+        </div>
+
+        <div>
+            <label for="preco">Preço:</label>
+            <input type="number" id="preco" name="preco" step="0.01" th:field="*{preco}" required />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-success">Cadastrar item</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -43,7 +43,7 @@ public class Animal {
     private String Esterilizacao;
 
     @Column
-    private String status;
+    private Integer idade;
 
     @ManyToOne
     @JoinColumn(name="cpf")

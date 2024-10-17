@@ -7,6 +7,4 @@ public interface MedVetRepository extends JpaRepository<MedVet, String> {
 
     MedVet findMedVetByCrmv(String crmv);
 
-    MedVet findByCrmvAndSenha(String crmv, String senha);
-
 }

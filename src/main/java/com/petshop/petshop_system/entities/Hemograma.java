@@ -2,21 +2,30 @@ package com.petshop.petshop_system.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "tb_hemograma")
 public class Hemograma {
 
     @Id
-    @Column
+    @Column(name = "id_hemograma")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_hemograma;
 
     @ManyToOne
     @JoinColumn(name = "id_animal", nullable = false)
     private Animal animal;
+
+    @ManyToOne
+    @JoinColumn(name = "crmv", nullable = false)
+    private MedVet medVet;
 
     @Column(nullable = false)
     public double hemacias;
@@ -38,5 +47,4 @@ public class Hemograma {
 
     @Column
     public String observacoes;
-    
 }

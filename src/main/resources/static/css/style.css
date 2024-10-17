@@ -221,8 +221,20 @@ form input:focus, form select:focus, form textarea:focus {
     color: #333; /* Cor do texto das informações do hemograma */
 }
 
+.error {
+    color: #ff0000; /* Cor vermelha para a mensagem de erro */
+    background-color: #ffe5e5; /* Fundo leve para destacar a mensagem */
+    border: 1px solid #ffcccc; /* Borda vermelha clara */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Cantos arredondados */
+    margin: 20px 0; /* Margem superior e inferior */
+    font-weight: bold; /* Texto em negrito */
+    font-size: 16px; /* Tamanho da fonte */
+    text-align: center; /* Centraliza o texto */
+}
+
+
 /* dark mode implementation */
-/* Global Styles for Dark Mode */
 body.dark-mode {
     background-color: #212529;
     color: #ced4da;

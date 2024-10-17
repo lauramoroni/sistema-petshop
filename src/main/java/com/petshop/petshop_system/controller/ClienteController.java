@@ -1,7 +1,10 @@
 package com.petshop.petshop_system.controller;
 
 import com.petshop.petshop_system.entities.Cliente;
+import com.petshop.petshop_system.repositories.EnderecoRepository;
+import com.petshop.petshop_system.repositories.ItemRepository;
 import com.petshop.petshop_system.services.ClienteService;
+import com.petshop.petshop_system.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,8 @@ public class ClienteController {
 
     @Autowired
     ClienteService clienteService;
+    @Autowired
+    private ItemService itemService;
 
     // Página de cadastro do cliente
     @GetMapping("/cadastro")
@@ -42,6 +47,7 @@ public class ClienteController {
     public String homeCliente( Model model, @PathVariable String cpf ) {
         Cliente cliente = clienteService.findByCPF(cpf);
         model.addAttribute("cliente", cliente);
+        model.addAttribute("endereco", cliente.getEndereco());
         return "/cliente/Home_Cliente";
     }
 
@@ -78,5 +84,18 @@ public class ClienteController {
     @GetMapping("/listar")
     public List<Cliente> listarClientes() {
        return clienteService.findAll();
+    }
+
+    @GetMapping("/{cpf}/itens")
+    public String itens(@PathVariable String cpf, Model model) {
+        model.addAttribute("itemList", itemService.findAll());
+        model.addAttribute("cpf", cpf);
+        return "item/item_list";
+    }
+
+    @PostMapping("/{cpf}/comprar-item")
+    public String comprarItem(@PathVariable String cpf, Model model, @RequestParam Long itemId) {
+        clienteService.comprarItem(cpf, itemId);
+        return "redirect:/cliente/{cpf}/home";
     }
 }

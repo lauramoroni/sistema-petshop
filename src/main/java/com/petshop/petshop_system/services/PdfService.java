@@ -1,104 +1,74 @@
 package com.petshop.petshop_system.services;
 
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
-import com.petshop.petshop_system.entities.Animal;
-import com.petshop.petshop_system.entities.Cliente;
+import com.lowagie.text.DocumentException;
 import com.petshop.petshop_system.entities.Hemograma;
-import com.petshop.petshop_system.entities.MedVet;
-import com.petshop.petshop_system.repositories.HemogramaRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.TemplateEngine;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.util.Optional;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @Service
 public class PdfService {
 
-    private final HemogramaRepository hemogramaRepository;
+    private static final String PDF_RESOURCES = "/pdf-resources/";
+    @Autowired
+    private HemogramaService hemogramaService;
+    @Autowired
+    private TemplateEngine templateEngine;
 
-    public PdfService(HemogramaRepository hemogramaRepository) {
-        this.hemogramaRepository = hemogramaRepository;
+    public PdfService(HemogramaService hemogramaService, SpringTemplateEngine templateEngine) {
+        this.hemogramaService = hemogramaService;
+        this.templateEngine = templateEngine;
     }
 
-    public ByteArrayInputStream gerarPdf(Long hemogramaId) {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+    public File generatePdf(Long id_hemograma) throws IOException, DocumentException {
+        Context context = getContext(id_hemograma);
+        String html = loadAndFillTemplate(context);
+        return renderPdf(html);
+    }
 
-        // Buscar o hemograma e os dados relacionados
-        Optional<Hemograma> hemogramaOptional = hemogramaRepository.findById(hemogramaId);
-        if (!hemogramaOptional.isPresent()) {
-            throw new RuntimeException("Hemograma não encontrado.");
+    private Context getContext(Long id_hemograma) {
+        Context context = new Context();
+        // Busca o hemograma específico
+        Hemograma hemograma = hemogramaService.findById(id_hemograma);
+        context.setVariable("hemograma", hemograma);
+        return context;
+    }
+
+    private String loadAndFillTemplate(Context context) {
+        // Certifique-se de que você tenha um template para o PDF na pasta correta
+        return templateEngine.process("animais/pdf_exame", context);
+    }
+
+    private File renderPdf(String html) throws IOException, DocumentException {
+        File file = File.createTempFile("hemograma", ".pdf");
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            ITextRenderer renderer = new ITextRenderer();
+
+            // Definir a base URL para os recursos (CSS, imagens)
+            String baseUrl = new ClassPathResource(PDF_RESOURCES).getURL().toExternalForm();
+
+            // Definir o documento HTML e a base URL para os recursos
+            renderer.setDocumentFromString(html, baseUrl);
+
+            // Renderizar o layout e criar o PDF
+            renderer.layout();
+            renderer.createPDF(outputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        Hemograma hemograma = hemogramaOptional.get();
-        Animal animal = hemograma.getAnimal();
-        Cliente cliente = animal.getCliente();
-        MedVet medVet = hemograma.getMedVet();
-
-        // Criar o PDF
-        PdfWriter writer = new PdfWriter(out);
-        Document document = new Document(new com.itextpdf.kernel.pdf.PdfDocument(writer));
-
-        // Adicionar o título do PDF
-        document.add(new Paragraph("Relatório de Hemograma"));
-
-        // Informações do Hemograma
-        document.add(new Paragraph("Dados do Hemograma:"));
-        Table tableHemograma = new Table(2);
-        tableHemograma.addCell("Hemácias");
-        tableHemograma.addCell(String.valueOf(hemograma.getHemacias()));
-        tableHemograma.addCell("Hematócrito");
-        tableHemograma.addCell(String.valueOf(hemograma.getHematocrito()));
-        tableHemograma.addCell("Hemoglobina");
-        tableHemograma.addCell(String.valueOf(hemograma.getHemoglobina()));
-        tableHemograma.addCell("Leucócitos");
-        tableHemograma.addCell(String.valueOf(hemograma.getLeucocitos()));
-        tableHemograma.addCell("Linfócitos");
-        tableHemograma.addCell(String.valueOf(hemograma.getLinfocitos()));
-        tableHemograma.addCell("Plaquetas");
-        tableHemograma.addCell(String.valueOf(hemograma.getPlaquetas()));
-        tableHemograma.addCell("Observações");
-        tableHemograma.addCell(hemograma.getObservacoes() != null ? hemograma.getObservacoes() : "Nenhuma");
-        document.add(tableHemograma);
-
-        // Informações do Animal
-        document.add(new Paragraph("Dados do Animal:"));
-        Table tableAnimal = new Table(2);
-        tableAnimal.addCell("Nome");
-        tableAnimal.addCell(animal.getNome());
-        tableAnimal.addCell("Idade");
-        tableAnimal.addCell(animal.getIdade() + "");
-        tableAnimal.addCell("Sexo");
-        tableAnimal.addCell(animal.getSexo());
-        tableAnimal.addCell("Esterilização");
-        tableAnimal.addCell(animal.getEsterilizacao());
-        document.add(tableAnimal);
-
-        // Informações do Tutor (Cliente)
-        document.add(new Paragraph("Dados do Tutor:"));
-        Table tableCliente = new Table(2);
-        tableCliente.addCell("Nome");
-        tableCliente.addCell(cliente.getNome());
-        tableCliente.addCell("CPF");
-        tableCliente.addCell(cliente.getCpf());
-        document.add(tableCliente);
-
-        // Informações do Médico Veterinário
-        document.add(new Paragraph("Dados do Médico Veterinário:"));
-        Table tableVet = new Table(2);
-        tableVet.addCell("Nome");
-        tableVet.addCell(medVet.getNome());
-        tableVet.addCell("CRMV");
-        tableVet.addCell(medVet.getCrmv());
-        document.add(tableVet);
-
-        // Fechar o documento
-        document.close();
-
-        return new ByteArrayInputStream(out.toByteArray());
+        file.deleteOnExit();
+        return file;
     }
+
 }

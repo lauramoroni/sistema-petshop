@@ -67,7 +67,9 @@
                 <strong>Observações:</strong>
                 <span th:text="${hemograma.observacoes}"></span>
               </p>
-              <a th:href="@{'/relatorio/hemograma/' + ${hemograma.id_hemograma}}"> Exportar exame </a>
+              <a th:href="@{'/exame/download-pdf/' + ${hemograma.id_hemograma}}"> Exportar exame </a>
+              <a th:href="@{'/exame/teste/' + ${hemograma.id_hemograma}}"> teste </a>
+
             </div>
           </li>
         </ul>

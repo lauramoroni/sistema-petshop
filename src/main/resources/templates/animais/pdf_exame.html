@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hemograma</title>
+</head>
+<body>
+    <h1>Hemograma - Ficha: <span th:text="${hemograma.id_hemograma}"></span></h1>
+    <p><strong>Hemácias:</strong> <span th:text="${hemograma.hemacias}"></span></p>
+    <p><strong>Hematócrito:</strong> <span th:text="${hemograma.hematocrito}"></span></p>
+    <p><strong>Hemoglobina:</strong> <span th:text="${hemograma.hemoglobina}"></span></p>
+    <p><strong>Leucócitos:</strong> <span th:text="${hemograma.leucocitos}"></span></p>
+    <p><strong>Linfócitos:</strong> <span th:text="${hemograma.linfocitos}"></span></p>
+    <p><strong>Plaquetas:</strong> <span th:text="${hemograma.plaquetas}"></span></p>
+    <p><strong>Observações:</strong> <span th:text="${hemograma.observacoes}"></span></p>
+</body>
+</html>

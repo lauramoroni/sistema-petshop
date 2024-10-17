@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Detalhes do Animal</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   </head>
   <body>
     <div class="navbar">
@@ -19,25 +20,25 @@
       <div class="container my-2">
         <h1>Detalhes do Animal: <span th:text="${animal.nome}"></span></h1>
 
-        <a class="btn" th:href="@{'/exame/' + ${crmv} + '/' + ${id_animal}}"
-          >Novo Exame</a
-        >
-
-        <form class="btn" th:action="@{'/animal/atualizar'}" method="post">
-            <input type="hidden" name="id_animal" th:value="${id_animal}"/>
-            <input type="hidden" name="crmv" th:value="${crmv}" />
-            <button type="submit" class="btn">Atualizar animal</button>
-        </form>
-        <form class="btn" th:action="@{'/animal/deletar'}" method="post">
-            <input type="hidden" name="id_animal" th:value="${id_animal}"/>
-            <input type="hidden" name="crmv" th:value="${crmv}" />
-            <button type="submit" class="btn">Deletar animal</button>
-        </form>
+            <a class="btn" th:href="@{'/exame/' + ${crmv} + '/' + ${id_animal}}"
+              >Novo Exame</a
+            >
+    
+            <form class="btn" th:action="@{'/animal/atualizar'}" method="post">
+                <input type="hidden" name="id_animal" th:value="${id_animal}"/>
+                <input type="hidden" name="crmv" th:value="${crmv}" />
+                <button type="submit" class="btn">Atualizar animal</button>
+            </form>
+            <form class="btn" th:action="@{'/animal/deletar'}" method="post">
+                <input type="hidden" name="id_animal" th:value="${id_animal}"/>
+                <input type="hidden" name="crmv" th:value="${crmv}" />
+                <button type="submit" class="btn">Deletar animal</button>
+            </form>
 
         <h2>Hemogramas Realizados:</h2>
         <ul>
           <li th:each="hemograma : ${hemogramas}">
-            <div class="hemograma-card">
+            <div id="hemograma-card">
               <h3>Ficha: <span th:text="${hemograma.id_hemograma}"></span></h3>
               <p>
                 <strong>Hemácias:</strong>
@@ -67,13 +68,16 @@
                 <strong>Observações:</strong>
                 <span th:text="${hemograma.observacoes}"></span>
               </p>
-              <a th:href="@{'/exame/download-pdf/' + ${hemograma.id_hemograma}}"> Exportar exame </a>
-              <a th:href="@{'/exame/teste/' + ${hemograma.id_hemograma}}"> teste </a>
 
+              <form class="btn" th:action="@{'/exame/teste/' + ${hemograma.id_hemograma}}" method="post">
+                <input type="hidden" name="id_animal" th:value="${id_animal}"/>
+                <input type="hidden" name="crmv" th:value="${crmv}" />
+                <button type="submit" class="btn">Exportar exame</button>
+            </form>
+              
             </div>
           </li>
         </ul>
-
       </div>
     </div>
   </body>

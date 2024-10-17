@@ -354,3 +354,67 @@ body.dark-mode .hemograma-card h3 {
 body.dark-mode .hemograma-card p {
     color: #adb5bd;
 }
+
+/* PDF */
+
+/* Estilo do container principal */
+#exame-info {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+/* Título geral */
+#exame-info h3 {
+    font-size: 1.5em;
+    border-bottom: 2px solid #4caf50;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    color: #4caf50;
+}
+
+/* Estilo dos parágrafos com dados */
+#exame-info p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Estilo dos textos fortes (nomes dos campos) */
+#exame-info p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Layout de informações */
+#animal-info, #medvet-info, #cliente-info, #hemograma-card {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fafafa;
+    border-left: 5px solid #4caf50;
+    border-radius: 5px;
+}
+
+/* Botão PDF */
+#download-pdf {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover para o botão */
+#download-pdf:hover {
+    background-color: #45a049;
+}

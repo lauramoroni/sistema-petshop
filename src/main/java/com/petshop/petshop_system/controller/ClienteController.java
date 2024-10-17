@@ -1,7 +1,9 @@
 package com.petshop.petshop_system.controller;
 
 import com.petshop.petshop_system.entities.Cliente;
+import com.petshop.petshop_system.entities.ItemComprado;
 import com.petshop.petshop_system.repositories.EnderecoRepository;
+import com.petshop.petshop_system.repositories.ItemCompradoRepository;
 import com.petshop.petshop_system.repositories.ItemRepository;
 import com.petshop.petshop_system.services.ClienteService;
 import com.petshop.petshop_system.services.ItemService;
@@ -21,6 +23,8 @@ public class ClienteController {
     ClienteService clienteService;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private ItemCompradoRepository itemCompradoRepository;
 
     // Página de cadastro do cliente
     @GetMapping("/cadastro")
@@ -96,6 +100,14 @@ public class ClienteController {
     @PostMapping("/{cpf}/comprar-item")
     public String comprarItem(@PathVariable String cpf, Model model, @RequestParam Long itemId) {
         clienteService.comprarItem(cpf, itemId);
-        return "redirect:/cliente/{cpf}/home";
+        return "redirect:/cliente/x{cpf}/home";
+    }
+
+    @GetMapping("/{cpf}/confirmar_compra/{itemId}")
+    public String confirmarCompra (@PathVariable String cpf, @PathVariable Long itemId, Model model) {
+        ItemComprado item = itemCompradoRepository.findById(itemId).orElse(null);
+        model.addAttribute("item", item);
+        model.addAttribute("cliente", clienteService.findByCPF(cpf));
+        return "item/confirmar_compra";
     }
 }

@@ -13,21 +13,29 @@
         .card {
             margin-top: 20px;
         }
+        .qrcode {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .qrcode img {
+            max-width: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: #fff;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2 class="text-center">Confirmação de Compra</h2>
 
-    <!-- Informações do Cliente -->
     <div class="card">
         <div class="card-header">
             <h4>Dados do Cliente</h4>
         </div>
         <div class="card-body">
             <p><strong>Nome:</strong> <span th:text="${cliente.nome}"></span></p>
-            <p><strong>CPF:</strong> <span th:text="${cliente.cpf}"></span></p>
-            <p><strong>Endereço:</strong> <span th:text="${cliente.endereco.logradouro} + ', ' + ${cliente.endereco.numero} + ' - ' + ${cliente.endereco.bairro}"></span></p>
+            <p><strong>Endereço:</strong> <span th:text="${cliente.endereco.rua} + ', ' + ${cliente.endereco.numero} + ' - ' + ${cliente.endereco.bairro}"></span></p>
             <p><strong>Cidade:</strong> <span th:text="${cliente.endereco.cidade}"></span></p>
             <p><strong>Estado:</strong> <span th:text="${cliente.endereco.estado}"></span></p>
         </div>
@@ -39,18 +47,21 @@
             <h4>Dados do Item</h4>
         </div>
         <div class="card-body">
-            <p><strong>Nome do Item:</strong> <span th:text="${item.nome}"></span></p>
-            <p><strong>Descrição:</strong> <span th:text="${item.descrição}"></span></p>
-            <p><strong>Quantidade:</strong> <span th:text="${quantidade}"></span></p>
-            <p><strong>Preço Unitário:</strong> R$ <span th:text="${#numbers.formatDecimal(item.preco, 2, 'COMMA', 'POINT')}"></span></p>
-            <p><strong>Total:</strong> R$ <span th:text="${#numbers.formatDecimal(item.preco.multiply(#numbers.createBigDecimal(quantidade)), 2, 'COMMA', 'POINT')}"></span></p>
+            <p><strong>Nome do Item:</strong> <span th:text="${item.getNome()}"></span></p>
+            <p><strong>Total:</strong> R$ <span th:text="${item.preco}"></span></p>
         </div>
     </div>
 
+    <!-- QR Code para Pagamento -->
+    <div class="qrcode">
+        <h4>Pagamento via QR Code</h4>
+        <img src="/images/qrcode.png" alt="QR Code para pagamento" />
+        <p>Escaneie o QR code com seu aplicativo bancário para realizar o pagamento.</p>
+    </div>
+
     <div class="text-center mt-4">
-        <form th:action="@{/cliente/{cpf}/finalizar-compra(cpf=${cliente.cpf})}" method="post">
-            <button type="submit" class="btn btn-success">Confirmar Compra</button>
-            <a href="#" class="btn btn-secondary">Cancelar</a>
+        <form th:action="@{/cliente/{cpf}/home(cpf=${cliente.cpf})}" method="get">
+            <button type="submit" class="btn btn-success">Cancelar Compra</button>
         </form>
     </div>
 </div>

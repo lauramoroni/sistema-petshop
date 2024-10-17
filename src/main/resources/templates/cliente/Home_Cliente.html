@@ -147,7 +147,9 @@
         <div class="section">
             <h3>🛒 Compras</h3>
             <ul>
-                <li th:each="compra : ${cliente.getItems()}" th:text="${compra.getNome()}"></li>
+                <li th:each="compra : ${cliente.getItems()}">
+                    <a th:href="@{/cliente/{cpf}/confirmar_compra/{itemId} (cpf=${cliente.cpf}, itemId=${compra.id})}" th:text="${compra.nome}"></a>
+                </li>
                 <li th:if="${#lists.isEmpty(cliente.getItems())}" class="no-records">Nenhum registro</li>
             </ul>
         </div>

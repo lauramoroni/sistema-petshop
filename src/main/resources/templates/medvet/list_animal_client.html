@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
+    
     <div th:replace="fragments/navbar"></div>
 
     <div class="container my-2">
@@ -39,7 +40,7 @@
         </tbody>
       </table>
 
-      <a th:href="@{'/veterinario/' + ${crmv}}">Voltar</a><br />
+      <a th:href="@{'/veterinario/' + ${crmv}}">Voltar</a><br/>
       <a th:href="@{'/animal/' + ${crmv} + '/cadastro/' + ${cliente.cpf}}"
         >Novo animal</a
       >

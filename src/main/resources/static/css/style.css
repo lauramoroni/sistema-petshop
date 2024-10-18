@@ -425,3 +425,9 @@ body.dark-mode .hemograma-card p {
       transform-origin: top left; /* Define a origem da transformação */
     }
   }
+  /* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+  }
+  

@@ -41,6 +41,7 @@ public class MedVetService {
         medVetUpdate.setCpf(medVet.getCpf());
         medVetUpdate.setEndereco(medVet.getEndereco());
         medVetUpdate.setTelefone(medVet.getTelefone());
+        medVetUpdate.setEspecialidade(medVet.getEspecialidade());
 
         return medVetRepository.save(medVetUpdate);
     }

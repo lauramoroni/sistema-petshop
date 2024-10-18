@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/animal")
 public class AnimalController {
@@ -29,6 +28,14 @@ public class AnimalController {
     @Autowired
     MedVetService medVetService;
 
+    // Home do animal (onde terá do CRUD)
+    @GetMapping("")
+    public String home() {
+        return "animais/home_animal";
+    }
+
+    // CRUD
+
     // Formulário para adicionar um novo animal
     @GetMapping("/{crmv}/cadastro/{cpf}")
     public String criarAnimalForm(Model model, @PathVariable String crmv, @PathVariable String cpf) {
@@ -39,15 +46,16 @@ public class AnimalController {
         model.addAttribute("clientes", clienteService.findByCPF(cpf));
         model.addAttribute("medVets", medVetService.FindByCRMV(crmv));
 
-        return "animais/form_animal"; // Retorna a view do formulário
+        return "/animais/form_animal"; // Retorna a view do formulário
     }
 
     // Adicionar novo animal
     @PostMapping("/{crmv}/cliente/{cpf}/animais")
-    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @PathVariable String cpf, @PathVariable String crmv) {
+    public String adicionarAnimal(@ModelAttribute("animal") Animal animal, @PathVariable String cpf,
+            @PathVariable String crmv) {
         // Configurar o cliente e o veterinário no animal antes de salvar
         Cliente cliente = clienteService.findByCPF(cpf);
-        MedVet medVet = medVetService.FindByCRMV(crmv); 
+        MedVet medVet = medVetService.FindByCRMV(crmv);
         animal.setCliente(cliente);
         animal.setMedVet(medVet);
         animalService.insert(animal);
@@ -56,11 +64,43 @@ public class AnimalController {
 
         return "redirect:/veterinario/{crmv}/cliente/{cpf}/animais"; // Redireciona para a lista de animais
     }
-    
-    // Detalhe do animal
-    @GetMapping("{id_animal}")
-    public String detalhesAnimal(@PathVariable Long id_animal) {
-        return "animais/detalhe_animal";
+
+    @GetMapping("/atualizar")
+    public String atualizar(@RequestParam Long id_animal, Model model) {
+        model.addAttribute("animal", animalService.findById(id_animal));
+        return "/animais/animal_update";
     }
-    
+
+    @PostMapping("/atualizar")
+    public String atualizarItem(@ModelAttribute Animal animal, @RequestParam Long id_animal, @RequestParam String crmv) {
+        animalService.update(id_animal, animal);
+        return "redirect:/veterinario/" + crmv;
+
+    }
+
+    @PostMapping("/deletar")
+    public String deletarItem(@RequestParam Long id_animal, @RequestParam String crmv) {
+        animalService.delete(id_animal);
+       
+        return "redirect:/veterinario/" + crmv;
+    }
+
+    // Detalhe do animal
+    @GetMapping("/{crmv}/{id_animal}")
+    public String detalhesAnimal(@PathVariable Long id_animal, @PathVariable String crmv, Model model) {
+        Animal animal = animalService.findById(id_animal);
+
+        // Verifica se o animal existe
+        if (animal == null) {
+            model.addAttribute("error", "Animal não encontrado.");
+            return "animais/error"; // Ou alguma outra página de erro
+        }
+
+        // Adiciona o animal e a lista de hemogramas ao modelo
+        model.addAttribute("animal", animal);
+        model.addAttribute("hemogramas", animal.getHemogramas());
+
+        return "animais/animal_detail";
+    }
+
 }

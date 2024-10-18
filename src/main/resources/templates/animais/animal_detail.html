@@ -24,9 +24,7 @@
               >Novo Exame</a
             >
     
-            <form class="btn" th:action="@{'/animal/atualizar'}" method="post">
-                <input type="hidden" name="id_animal" th:value="${id_animal}"/>
-                <input type="hidden" name="crmv" th:value="${crmv}" />
+            <form class="btn" th:action="@{'/animal/atualizar/' + ${crmv} + '/' + ${id_animal}}" method="get">
                 <button type="submit" class="btn">Atualizar animal</button>
             </form>
             <form class="btn" th:action="@{'/animal/deletar'}" method="post">
@@ -42,27 +40,27 @@
               <h3>Ficha: <span th:text="${hemograma.id_hemograma}"></span></h3>
               <p>
                 <strong>Hemácias:</strong>
-                <span th:text="${hemograma.hemacias}"></span>
+                <span th:text="${hemograma.hemacias} + ' (milhões/mm3)'"></span>
               </p>
               <p>
                 <strong>Hematócrito:</strong>
-                <span th:text="${hemograma.hematocrito}"></span>
+                <span th:text="${hemograma.hematocrito} + ' %'"></span>
               </p>
               <p>
                 <strong>Hemoglobina:</strong>
-                <span th:text="${hemograma.hemoglobina}"></span>
+                <span th:text="${hemograma.hemoglobina} + ' g/dL'"></span>
               </p>
               <p>
                 <strong>Leucócitos:</strong>
-                <span th:text="${hemograma.leucocitos}"></span>
+                <span th:text="${hemograma.leucocitos} + '/mm3'"></span>
               </p>
               <p>
                 <strong>Linfócitos:</strong>
-                <span th:text="${hemograma.linfocitos}"></span>
+                <span th:text="${hemograma.linfocitos} + '/mcL'"></span>
               </p>
               <p>
                 <strong>Plaquetas:</strong>
-                <span th:text="${hemograma.plaquetas}"></span>
+                <span th:text="${hemograma.plaquetas} + '/mcL'"></span>
               </p>
               <p>
                 <strong>Observações:</strong>

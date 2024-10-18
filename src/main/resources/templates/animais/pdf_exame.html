@@ -41,27 +41,27 @@
         </h3>
         <p>
           <strong>Hemácias:</strong>
-          <span th:text="${hemograma.hemacias}"></span>
+          <span th:text="${hemograma.hemacias} + ' (milhões/mm3)'"></span>
         </p>
         <p>
           <strong>Hematócrito:</strong>
-          <span th:text="${hemograma.hematocrito}"></span>
+          <span th:text="${hemograma.hematocrito} + ' %'"></span>
         </p>
         <p>
           <strong>Hemoglobina:</strong>
-          <span th:text="${hemograma.hemoglobina}"></span>
+          <span th:text="${hemograma.hemoglobina} + ' g/dL'"></span>
         </p>
         <p>
           <strong>Leucócitos:</strong>
-          <span th:text="${hemograma.leucocitos}"></span>
+          <span th:text="${hemograma.leucocitos} + '/mm3'"></span>
         </p>
         <p>
           <strong>Linfócitos:</strong>
-          <span th:text="${hemograma.linfocitos}"></span>
+          <span th:text="${hemograma.linfocitos} + '/mcL'"></span>
         </p>
         <p>
           <strong>Plaquetas:</strong>
-          <span th:text="${hemograma.plaquetas}"></span>
+          <span th:text="${hemograma.plaquetas} + '/mcL'"></span>
         </p>
         <p>
           <strong>Observações:</strong>
@@ -94,10 +94,10 @@
               allowTaint: true, // Permite que imagens sejam tainted, se necessário
             },
             jsPDF: {
-                unit: 'in',
-                format: 'a4', // Formato da página (ex: 'a4', 'letter', etc.)
-                orientation: 'portrait' // Orientação da página
-              },
+              unit: "in",
+              format: "a4", // Formato da página (ex: 'a4', 'letter', etc.)
+              orientation: "portrait", // Orientação da página
+            },
             pagebreak: { mode: ["avoid-all", "css", "legacy"] },
           };
 

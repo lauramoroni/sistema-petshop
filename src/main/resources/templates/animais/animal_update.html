@@ -7,8 +7,9 @@
 </head>
 <body>
     <div class="container my-2">
-        <h1>Cadastro de Animal</h1>
-        <form th:action="@{'/veterinario/' + ${crmv}}" th:object="${animal}" method="post"> <!-- Corrigido para /animal/cadastro -->
+        <h1>Atualização de Animal</h1>
+        <form th:action="@{'/animal/atualizar/' + ${crmv} + '/' + ${id_animal}}" th:object="${animal}" method="post"> <!-- Corrigido para /animal/cadastro -->
+            
             <div>
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" th:field="*{nome}" required />
@@ -24,8 +25,8 @@
             </div>
 
             <div>
-                <label for="esterilizacao">Esterilização:</label>
-                <select id="esterilizacao" name="esterilizacao" th:field="*{esterilizacao}" required>
+                <label for="Esterilizacao">Esterilização:</label>
+                <select id="Esterilizacao" name="Esterilizacao" th:field="*{Esterilizacao}" required>
                     <option value="" disabled selected>Selecione o estado de esterilização</option>
                     <option value="Fértil">Fértil</option>
                     <option value="Castrado">Castrado</option>
@@ -34,10 +35,9 @@
             </div>
 
             <div>
-                <button type="submit" class="btn btn-success">Cadastrar Animal</button>
+                <button type="submit" class="btn btn-success">Atualizar Animal</button>
             </div>
         </form>
-        <a th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
     </div>
 </body>
 </html>

@@ -418,3 +418,10 @@ body.dark-mode .hemograma-card p {
 #download-pdf:hover {
     background-color: #45a049;
 }
+
+@media print {
+    #hemograma-card {
+      transform: scale(0.8); /* Reduz o tamanho */
+      transform-origin: top left; /* Define a origem da transformação */
+    }
+  }

@@ -1,21 +1,34 @@
 const botaoAlterarTema = document.getElementById("darkModeToggle");
 const body = document.querySelector("body");
-
-// o querySelector consulta um seletor (class, etc)
 const trocarImagem = document.querySelector(".imagem-botao");
 
+// Função para aplicar o tema salvo
+function aplicarTemaSalvo() {
+  const temaSalvo = localStorage.getItem("theme");
+  if (temaSalvo === "dark") {
+    body.classList.add("dark-mode");
+    trocarImagem.setAttribute("src", "/images/sun.png"); // Define a imagem do sol
+  } else {
+    body.classList.remove("dark-mode");
+    trocarImagem.setAttribute("src", "/images/moon.png"); // Define a imagem da lua
+  }
+}
+
+// Chama a função para aplicar o tema salvo ao carregar a página
+aplicarTemaSalvo();
+
 botaoAlterarTema.addEventListener("click", () => {
-  // alterna a classe "dark-mode" no body
+  // Alterna a classe "dark-mode" no body
   body.classList.toggle("dark-mode");
 
-  // salva a que ja tava no localStorage
+  // Salva a que já estava no localStorage
   if (body.classList.contains("dark-mode")) {
     localStorage.setItem("theme", "dark");
-    //trocar o sol pela lua
+    // Trocar o sol pela lua
     trocarImagem.setAttribute("src", "/images/sun.png");
   } else {
     localStorage.setItem("theme", "light");
-    //trocar a lua pelo sol
+    // Trocar a lua pelo sol
     trocarImagem.setAttribute("src", "/images/moon.png");
   }
 });

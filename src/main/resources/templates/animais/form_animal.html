@@ -4,7 +4,28 @@
     <meta charset="UTF-8" />
     <title>Cadastro de Animal</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+      body {
+          padding-top: 0px; /* Ajusta a margem superior do corpo */
+      }
+      .form {
+          padding: 35px;
+      }
+      .container {
+          margin-top: -130px; /* Ajusta a margem superior do container */
+      }
+  </style>
   </head>
+  <button id="darkModeToggle" class="btn">
+    <a>
+      <img
+        src="/images/moon.png"
+        alt="Imagem da lua"
+        class="imagem-botao"
+      />
+    </a>
+  </button>
+  <script th:src="@{/js/darkModeToggle.js}"></script>
   <body>
     <div class="container my-2">
       <h1>Cadastro de Animal</h1>
@@ -15,6 +36,7 @@
       >
         <!-- Corrigido para /animal/cadastro -->
         <div>
+          <label for=></label>   
           <label for="nome">Nome:</label>
           <input
             type="text"
@@ -81,7 +103,7 @@
       </form>
       <a
         th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}"
-        >Voltar para a lista de animais</a
+        >                            Voltar para a lista de animais</a
       >
       <!-- Corrigido para usar th:href -->
     </div>

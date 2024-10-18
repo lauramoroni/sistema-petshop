@@ -28,6 +28,7 @@ a:hover {
     width: 90%;
     margin: 0 auto;
     max-width: 1200px;
+    padding-top: 100px; /* Este valor deve ser ajustado para a altura da sua navbar */
 }
 
 /* Table Styling */
@@ -70,7 +71,7 @@ tr:hover {
 form {
     width: 60%;
     margin: 20px auto;
-    padding: 25px;
+    padding: 0px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -78,6 +79,7 @@ form {
 }
 
 form label {
+    margin-left: 25px;
     display: block;
     margin-bottom: 10px;
     color: #555;
@@ -86,8 +88,9 @@ form label {
 }
 
 form input, form select, form textarea {
-    width: 100%;
+    width: 90%;
     padding: 12px;
+    margin-left: 25px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -95,6 +98,7 @@ form input, form select, form textarea {
 }
 
 form textarea {
+    
     resize: vertical;
     min-height: 100px;
 }
@@ -147,50 +151,86 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 12px;
     }
 }
-.navbar {
+/* Navbar Styling */
+.navbar{
     background-color: #009688;
     overflow: hidden;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-  }
+    display: flex;
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-  .navbar a {
-    float: left;
-    display: block;
+/* Logo Styling */
+.navbar .logo {
+    width: 60px;
+    height: 60px;
+    background-image: url('/images/gatagorda.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 15px; /* Espaço entre a logo e os links */
+}
+
+/* Navbar Links */
+.navbar a {
     color: white;
     text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
+    padding: 12px 18px;
     font-size: 17px;
-  }
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
 
-  .navbar a:hover {
+.navbar a:hover {
     background-color: #00796b;
-  }
+}
 
-  .navbar a.active {
+.navbar a.active {
     background-color: #004d40;
-  }
+}
 
-  .navbar img {
-    height: 40px; /* Ajuste a altura da logo */
-    padding: 5px; /* Espaçamento entre a logo e o topo da barra */
-  }
+/* Botão de Dark Mode */
+#darkModeToggle {
+    margin-left: auto; /* Empurra o botão para a extrema direita */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
-  .content {
-    padding-top: 60px; 
-  }
+#darkModeToggle img {
+    height: 30px; /* Ajuste do tamanho da imagem */
+    width: 30px;
+    transition: transform 0.2s ease;
+}
 
-.navbar .logo {
-    display: inline-block; /* Permite definir dimensões */
-    width: 60px; /* Ajuste conforme necessário para a largura da logo */
-    height: 65px; /* Ajuste conforme necessário para a altura da logo */
-    background-image: url('/images/gatagorda.png'); /* Caminho da logo */
-    background-size: 60px; /* Ajusta a imagem para caber na tag */
-    background-repeat: no-repeat; /* Não repete a imagem */
-    padding: 0; /* Remove o padding */
+#darkModeToggle img:hover {
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+/* Ajustes de responsividade */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .navbar a {
+        width: 100%; /* Links ocupam toda a largura em telas menores */
+        text-align: left;
+        padding: 10px;
+    }
+
+    #darkModeToggle {
+        align-self: flex-end; /* Alinha o botão à direita */
+        margin-top: 10px;
+    }
+
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação de Compra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .qrcode {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .qrcode img {
+            max-width: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Confirmação de Compra</h2>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Dados do Cliente</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Nome:</strong> <span th:text="${cliente.nome}"></span></p>
+            <p><strong>Endereço:</strong> <span th:text="${cliente.endereco.rua} + ', ' + ${cliente.endereco.numero} + ' - ' + ${cliente.endereco.bairro}"></span></p>
+            <p><strong>Cidade:</strong> <span th:text="${cliente.endereco.cidade}"></span></p>
+            <p><strong>Estado:</strong> <span th:text="${cliente.endereco.estado}"></span></p>
+        </div>
+    </div>
+
+    <!-- Informações do Item -->
+    <div class="card">
+        <div class="card-header">
+            <h4>Dados do Item</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Nome do Item:</strong> <span th:text="${item.getNome()}"></span></p>
+            <p><strong>Total:</strong> R$ <span th:text="${item.preco}"></span></p>
+        </div>
+    </div>
+
+    <!-- QR Code para Pagamento -->
+    <div class="qrcode">
+        <h4>Pagamento via QR Code</h4>
+        <img src="/images/qrcode.png" alt="QR Code para pagamento" />
+        <p>Escaneie o QR code com seu aplicativo bancário para realizar o pagamento.</p>
+    </div>
+
+    <div class="text-center mt-4">
+        <form th:action="@{/cliente/{cpf}/home(cpf=${cliente.cpf})}" method="get">
+            <button type="submit" class="btn btn-success">Cancelar Compra</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

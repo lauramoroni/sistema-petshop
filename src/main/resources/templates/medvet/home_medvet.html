@@ -9,23 +9,7 @@
 
   <body>
     <!-- Barra de navegação -->
-    <div class="navbar">
-      <a href="/home" class="logo"></a>
-      <a href="/home">Home</a>
-      <a href="/clientes" class="active">Clientes</a>
-      <a href="/animal">Animais</a>
-      <a href="/veterinario">Veterinários</a>
-      <a href="/exame">Exames</a>
-      <button id="darkModeToggle" class="btn">
-        <a>
-          <img
-            src="/images/moon.png"
-            alt="Imagem da lua"
-            class="imagem-botao"
-          />
-        </a>
-      </button>
-    </div>
+    <div th:replace="fragments/navbar"></div>
 
     <!-- Conteúdo da página -->
     <div class="container my-2 content">
@@ -56,6 +40,5 @@
         </tbody>
       </table>
     </div>
-    <script th:src="@{/js/darkModeToggle.js}"></script>
   </body>
 </html>

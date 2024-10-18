@@ -7,14 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   </head>
   <body>
-    <div class="navbar">
-      <a href="/home" class="logo"></a>
-      <a href="/home">Home</a>
-      <a href="/clientes">Clientes</a>
-      <a href="/animais">Animais</a>
-      <a href="/veterinarios">Veterinários</a>
-      <a href="/consultas" class="active">Consultas</a>
-    </div>
+    <div th:replace="fragments/navbar"></div>
 
     <div class="content">
       <div class="container my-2">

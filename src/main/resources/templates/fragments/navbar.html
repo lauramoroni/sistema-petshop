@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div class="navbar">
+      <a href="/home" class="logo"></a>
+      <a href="/home">Home</a>
+      <a href="/veterinario/login">Logout</a>
+      <a th:href="@{'/veterinario/' + ${crmv}}">Clientes</a>
+      <button id="darkModeToggle" class="btn">
+        <a>
+          <img
+            src="/images/moon.png"
+            alt="Imagem da lua"
+            class="imagem-botao"
+          />
+        </a>
+      </button>
+    </div>
+    <script th:src="@{/js/darkModeToggle.js}"></script>
+  </body>
+</html>

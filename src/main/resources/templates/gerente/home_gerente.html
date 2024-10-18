@@ -34,6 +34,9 @@
             color: #007BFF;
             border-bottom: 2px solid #007BFF;
             padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         table {
@@ -60,43 +63,26 @@
             background-color: #f9f9f9;
         }
 
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-
-        .stats div {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            width: 30%;
-        }
-
-        .stats div h3 {
-            margin: 0;
-        }
-        }
         .btn {
             cursor: pointer;
             padding: 5px 10px;
             border: none;
             border-radius: 4px;
-            cursor: pointer;
         }
+
+        .btn-add {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
         .btn-update {
             background-color: #28a745;
             color: #fff;
         }
+
         .btn-delete {
             background-color: #dc3545;
             color: #fff;
-        }
-        .btn-desconto {
-            background-color: #ffc107;
-            color: #000;
         }
     </style>
 </head>
@@ -105,64 +91,40 @@
 <div class="container">
     <h1>Painel de Monitoramento</h1>
 
-    <!-- Estatísticas Resumidas -->
-    <div class="stats">
-        <div>
-            <h3>Total de Clientes</h3>
-            <p>150</p>
-        </div>
-        <div>
-            <h3>Total de Veterinários</h3>
-            <p>25</p>
-        </div>
-        <div>
-            <h3>Produtos no Estoque</h3>
-            <p>87</p>
-        </div>
-    </div>
-
     <!-- Seção de Clientes -->
     <div class="section">
-        <h2>Clientes Cadastrados</h2>
+        <h2>Clientes Registrados</h2>
         <table>
             <thead>
             <tr>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefone</th>
-                <th>Animal</th>
-                <th>Última Compra</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Ana Silva</td>
-                <td>ana.silva@email.com</td>
-                <td>(84) 99999-9999</td>
-                <td>Rex (Cachorro)</td>
-                <td>10/10/2024</td>
+            <tr th:each="cliente : ${clienteList}">
+                <td th:text="${cliente.getNome()}"></td>
+                <td th:text="${cliente.getEmail()}"></td>
+                <td th:text="${cliente.getCelular()}"></td>
+                <td>
+                    <form th:action="@{/cliente/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este cliente?');">
+                        <input type="hidden" name="cpf" th:value="${cliente.getCpf()}"/>
+                        <button type="submit" class="btn btn-delete">Deletar</button>
+                    </form>
+                </td>
             </tr>
-            <tr>
-                <td>João Pereira</td>
-                <td>joao.pereira@email.com</td>
-                <td>(84) 98888-8888</td>
-                <td>Mia (Gato)</td>
-                <td>08/10/2024</td>
-            </tr>
-            <tr>
-                <td>Maria Souza</td>
-                <td>maria.souza@email.com</td>
-                <td>(84) 97777-7777</td>
-                <td>Bob (Papagaio)</td>
-                <td>05/10/2024</td>
-            </tr>
+            <!-- Repetir para outras operações -->
             </tbody>
         </table>
     </div>
 
-    <!-- Seção de Veterinários -->
+    <!-- Seção de Médicos Veterinários -->
     <div class="section">
-        <h2>Veterinários Trabalhando</h2>
+        <h2>Veterinários Trabalhando
+            <button class="btn btn-add">Adicionar Veterinário</button>
+        </h2>
         <table>
             <thead>
             <tr>
@@ -170,73 +132,77 @@
                 <th>Especialidade</th>
                 <th>Email</th>
                 <th>Telefone</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Dr. Carlos Mendes</td>
-                <td>Dermatologia</td>
-                <td>carlos.mendes@vetclinica.com</td>
-                <td>(84) 96666-6666</td>
+            <tr th:each="veterinario : ${veterinarioList}">
+                <td th:text="${veterinario.getNome()}"></td>
+                <td th:text="${veterinario.getEspecialidade()}"></td>
+                <td th:text="${veterinario.getEmail()}"></td>
+                <td th:text="${veterinario.getCelular()}"></td>
+                <td>
+                    <form th:action="@{/veterinario/atualizar}" method="get">
+                        <input type="hidden" name="crmv" th:value="${veterinario.getCrmv()}"/>
+                        <button type="submit" class="btn btn-update">Atualizar</button>
+                    </form>
+                    <form th:action="@{/veterinario/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este veterinário?');">
+                        <input type="hidden" name="crmv" th:value="${veterinario.getCrmv()}"/>
+                        <button type="submit" class="btn btn-delete">Deletar</button>
+                    </form>
+                </td>
             </tr>
-            <tr>
-                <td>Dra. Laura Oliveira</td>
-                <td>Cardiologia</td>
-                <td>laura.oliveira@vetclinica.com</td>
-                <td>(84) 95555-5555</td>
-            </tr>
-            <tr>
-                <td>Dr. Paulo Costa</td>
-                <td>Ortopedia</td>
-                <td>paulo.costa@vetclinica.com</td>
-                <td>(84) 94444-4444</td>
-            </tr>
+            <!-- Repetir para outros veterinários -->
             </tbody>
         </table>
     </div>
 
-    <!-- Seção de Produtos -->
     <div class="section">
-        <h2>Produtos no Estoque</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Descrição</th>
-                <th>Quantidade em Estoque</th>
-                <th>Preço Unitário (R$)</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr th:each="item : ${itemList}">
-                <td th:text="${item.getNome()}"></td>
-                <td th:text="${item.getDescrição()}"></td>
-                <td th:text="${item.getQuantidade()}"></td>
-                <td th:text="${item.getPreco()}"></td>
-                <td>
-                    <form th:action="@{/item/aplicar-desconto}" method="post">
-                        <input type="hidden" th:value="${item.getId()}" name="itemId"/>
-                        <input type="number" name="percentualDesconto" min="0" max="100"/>
-                        <button class="btn btn-desconto" type="submit">Aplicar Desconto</button>
-                    </form>
-                </td>
-                <td>
+    <h2>Produtos em estoque
+        <form th:action="@{/item/cadastro}" method="get">
+            <button type="submit" class="btn btn-add">Adicionar item</button>
+        </form>
+    </h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Descrição</th>
+            <th>Quantidade em Estoque</th>
+            <th>Preço Unitário (R$)</th>
+            <th>Aplicar Desconto</th>
+            <th>Atualizar</th>
+            <th>Deletar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${itemList}">
+            <td th:text="${item.getNome()}"></td>
+            <td th:text="${item.getDescrição()}"></td>
+            <td th:text="${item.getQuantidade()}"></td>
+            <td th:text="${item.getPreco()}"></td>
+            <td>
+                <form th:action="@{/item/aplicar-desconto}" method="post">
+                    <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                    <input type="number" name="percentualDesconto" min="0" max="100" placeholder="Desconto (%)" required/>
+                    <button type="submit" class="btn btn-desconto">Aplicar</button>
+                </form>
+            </td>
+            <td>
                 <form th:action="@{/item/atualizar}" method="get">
                     <input type="hidden" th:value="${item.getId()}" name="itemId"/>
                     <button type="submit" class="btn btn-update"><i class="fas fa-edit"></i> Atualizar</button>
                 </form>
-                </td>
-                <td>
-                    <form th:action="@{/item/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este item?');">
-                        <input type="hidden" th:value="${item.getId()}" name="itemId"/>
-                        <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i> Deletar</button>
-                    </form>
-                </td>
-            </tr>
-
-            </tbody>
-        </table>
+            </td>
+            <td>
+                <form th:action="@{/item/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este item?');">
+                    <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                    <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i> Deletar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     </div>
 </div>
 

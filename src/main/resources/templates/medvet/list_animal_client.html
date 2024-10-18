@@ -14,6 +14,7 @@
         <thead>
         <tr>
             <th>Nome</th>
+            <th>Espécie</th>
             <th>Idade</th>
             <th>Sexo</th>
             <th>Esterilização</th>
@@ -23,6 +24,7 @@
         <tbody>
         <tr th:each="animal : ${animais}">
             <td th:text="${animal.nome}"></td>
+            <td th:text="${animal.especie}"></td>
             <td th:text="${animal.idade} + ' anos'"></td>
             <td th:text="${animal.sexo}"></td>
             <td th:text="${animal.Esterilizacao}"></td>

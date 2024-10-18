@@ -1,48 +1,89 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Cadastro de Animal</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="container my-2">
-        <h1>Cadastro de Animal</h1>
-        <form th:action="@{'/animal/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}" th:object="${animal}" method="post"> <!-- Corrigido para /animal/cadastro -->
-            <div>
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" th:field="*{nome}" required />
-            </div>
+      <h1>Cadastro de Animal</h1>
+      <form
+        th:action="@{'/animal/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}"
+        th:object="${animal}"
+        method="post"
+      >
+        <!-- Corrigido para /animal/cadastro -->
+        <div>
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            th:field="*{nome}"
+            required
+          />
+        </div>
 
-            <div>
-                <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" th:field="*{idade}" required />
-            </div>
+        <div>
+          <label for="idade">Idade:</label>
+          <input
+            type="number"
+            id="idade"
+            name="idade"
+            th:field="*{idade}"
+            required
+          />
+        </div>
 
-            <div>
-                <label for="sexo">Sexo:</label>
-                <select id="sexo" name="sexo" th:field="*{sexo}" required>
-                    <option value="" disabled selected>Selecione o sexo</option>
-                    <option value="Macho">Macho</option>
-                    <option value="Fêmea">Fêmea</option>
-                </select>
-            </div>
+        <div>
+          <label for="especie">Espécie:</label>
+          <select id="especie" name="especie" th:field="*{especie}" required>
+            <option value="" disabled selected>
+              Selecione a espécie do animal
+            </option>
+            <option value="Canino">Canino</option>
+            <option value="Felino">Felino</option>
+          </select>
+        </div>
 
-            <div>
-                <label for="esterilizacao">Esterilização:</label>
-                <select id="esterilizacao" name="esterilizacao" th:field="*{esterilizacao}" required>
-                    <option value="" disabled selected>Selecione o estado de esterilização</option>
-                    <option value="Fértil">Fértil</option>
-                    <option value="Castrado">Castrado</option>
-                    <option value="Vasectomizado">Vasectomizado</option>
-                </select>
-            </div>
+        <div>
+          <label for="sexo">Sexo:</label>
+          <select id="sexo" name="sexo" th:field="*{sexo}" required>
+            <option value="" disabled selected>Selecione o sexo</option>
+            <option value="Macho">Macho</option>
+            <option value="Fêmea">Fêmea</option>
+          </select>
+        </div>
 
-            <div>
-                <button type="submit" class="btn btn-success">Cadastrar Animal</button>
-            </div>
-        </form>
-        <a th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}">Voltar para a lista de animais</a> <!-- Corrigido para usar th:href -->
+        <div>
+          <label for="esterilizacao">Esterilização:</label>
+          <select
+            id="esterilizacao"
+            name="esterilizacao"
+            th:field="*{esterilizacao}"
+            required
+          >
+            <option value="" disabled selected>
+              Selecione o estado de esterilização
+            </option>
+            <option value="Fértil">Fértil</option>
+            <option value="Castrado">Castrado</option>
+            <option value="Vasectomizado">Vasectomizado</option>
+          </select>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-success">
+            Cadastrar Animal
+          </button>
+        </div>
+      </form>
+      <a
+        th:href="@{'/veterinario/' + ${crmv} + '/cliente/' + ${cpf} + '/animais'}"
+        >Voltar para a lista de animais</a
+      >
+      <!-- Corrigido para usar th:href -->
     </div>
-</body>
+  </body>
 </html>

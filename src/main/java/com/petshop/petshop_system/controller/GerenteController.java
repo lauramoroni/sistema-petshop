@@ -4,12 +4,9 @@ import com.petshop.petshop_system.entities.Cliente;
 import com.petshop.petshop_system.entities.Gerente;
 import com.petshop.petshop_system.entities.Item;
 import com.petshop.petshop_system.entities.MedVet;
-import com.petshop.petshop_system.services.ClienteService;
-import com.petshop.petshop_system.services.ItemService;
-import com.petshop.petshop_system.services.MedVetService;
+import com.petshop.petshop_system.services.*;
 
 import org.springframework.ui.Model;
-import com.petshop.petshop_system.services.GerenteService;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,6 +31,8 @@ public class GerenteController {
     private MedVetService medVetService;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private LogService logService;
 
     @GetMapping("/login")
     public String login() {
@@ -100,7 +99,11 @@ public class GerenteController {
         return "redirect:/gerente/home";
     }
 
-
+    @GetMapping("/logs")
+    public String logs(Model model) {
+        model.addAttribute("logs", logService.findAll());
+        return "/gerente/log";
+    }
 
 
 

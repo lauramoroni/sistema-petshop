@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logs de Modificações</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Logs de Modificações</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Cliente</th>
+        <th>Operação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="log : ${logs}">
+        <td th:text="${log.date}"></td>
+        <td th:text="${log.cliente}"></td>
+        <td th:text="${log.modificacao}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

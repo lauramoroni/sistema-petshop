@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Exame</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container my-2">
+        <h1>Hemograma</h1>
+        <form th:action="@{'/exame/' + ${medVet.crmv} + '/' + ${animal.id}}" th:object="${hemograma}" method="post">
+            <h2 th:text="'Cadastrar Hemograma para ' + ${animal.nome}"></h2>
+
+            <label for="hemacias">Hemácias:</label>
+            <input type="number" step="0.01" id="hemacias" th:field="*{hemacias}" required />
+        
+            <label for="hematocrito">Hematocrito:</label>
+            <input type="number" step="0.01" id="hematocrito" th:field="*{hematocrito}" required />
+        
+            <label for="hemoglobina">Hemoglobina:</label>
+            <input type="number" step="0.01" id="hemoglobina" th:field="*{hemoglobina}" required />
+        
+            <label for="leucocitos">Leucócitos:</label>
+            <input type="number" step="0.01" id="leucocitos" th:field="*{leucocitos}" required />
+        
+            <label for="linfocitos">Linfócitos:</label>
+            <input type="number" step="0.01" id="linfocitos" th:field="*{linfocitos}" required />
+        
+            <label for="plaquetas">Plaquetas:</label>
+            <input type="number" step="0.01" id="plaquetas" th:field="*{plaquetas}" required />
+
+            <label for="observacoes">Observações:</label>
+            <input type="text" id="observacoes" th:field="*{observacoes}" />
+        
+            <button type="submit">Salvar Exame</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,44 +1,161 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
 
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
 
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .section {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .section p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .whatsapp-button {
+            background: #25D366;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .add-animal-button {
+            background: #3498db;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .no-records {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animal-link {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .buy-items-button {
+            margin-left: auto;
+            background: #e67e22;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <h2 th:text="${cliente.nome}"></h2>
+        <a th:href="@{/cliente/{cpf}/itens(cpf=${cliente.cpf})}" class="buy-items-button">Comprar Itens</a>
+    </div>
 
-<div class="container my-2">
-    <h1>Informação clientes</h1>
+    <div class="content">
+        <div class="section">
+            <h3>📞 Contatos</h3>
+            <p th:text="'Celular - ' + ${cliente.celular}"></p>
+            <p th:text="'Telefone - ' + ${cliente.telefone}"></p>
+            <p th:text="'Email - ' + ${cliente.email}"></p>
+        </div>
 
-    <table border="1" class = "table table-striped table-responsive-md">
-        <thead>
-        <tr>
-            <th> CPF </th>
-            <th> Nome </th>
-            <th> Celular </th>
-            <th> Telefone </th>
-            <th> Email </th>
-            <th> Actions </th>
-        </tr>
-        </thead>
-        <tbody>
-            <td th:text="${cliente.cpf}"></td>
-            <td th:text="${cliente.nome}"></td>
-            <td th:text="${cliente.celular}"></td>
-            <td th:text="${cliente.telefone}"></td>
-            <td th:text="${cliente.email}"></td>
-            <td>Update Delete </td>
-        </tbody>
-    </table>
+        <div class="section">
+            <h3>📍 Endereço</h3>
+            <p th:text="'CEP: ' + ${endereco.getCep()}"></p>
+            <p th:text="'Estado: ' + ${endereco.getEstado()}"></p>
+            <p th:text="'Cidade: ' + ${endereco.getCidade()}"></p>
+            <p th:text="'Bairro: ' + ${endereco.getBairro()}"></p>
+            <p th:text="'Rua: ' + ${endereco.getRua()}"></p>
+            <p th:text="'Número: ' + ${endereco.getNumero()}"></p>
+            <p th:text="'Ponto de referência: '+ ${endereco.getPonto_referencia()}"></p>
+        </div>
 
-    <a href="editar-cliente"+> Editar informações </a>
+        <div class="section">
+            <h3>📝 Documentos</h3>
+            <p th:text="'CPF: ' + ${cliente.getCpf()}"></p>
+        </div>
 
 
+        <div class="section">
+            <h3>🐾 Animais</h3>
+            <ul>
+                <li th:each="animal : ${cliente.getAnimais()}" th:text="${animal.getNome()}"></li>
+                <li th:if="${#lists.isEmpty(cliente.getAnimais())}" class="no-records">Nenhum registro</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>🛒 Compras</h3>
+            <ul>
+                <li th:each="compra : ${cliente.getItems()}">
+                    <a th:href="@{/cliente/{cpf}/confirmar_compra/{itemId} (cpf=${cliente.cpf}, itemId=${compra.id})}" th:text="${compra.nome}"></a>
+                </li>
+                <li th:if="${#lists.isEmpty(cliente.getItems())}" class="no-records">Nenhum registro</li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="editar-cliente" class="add-animal-button">Atualizar dados</a>
 </div>
 </body>
 </html>

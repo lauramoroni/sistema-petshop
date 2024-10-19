@@ -30,11 +30,6 @@ public class AnimalService {
     }
 
     // Método para encontrar o animal pelo veterinário
-    public List<Animal> findByMedVet(MedVet medVet) {
-        return animalRepository.findByMedVet(medVet); 
-    }
-
-    // Método para encontrar o animal pelo veterinário
     public List<Animal> findByCliente(Cliente cliente) {
         return animalRepository.findByCliente(cliente); 
     }
@@ -47,13 +42,10 @@ public class AnimalService {
 
     // Método para inserir um animal
     public Animal insert(Animal animal) {
-        // Certifique-se de que o cliente e o veterinário estão corretamente associados
-        // ao animal
+        
         Cliente cliente = clienteService.findByCPF(animal.getCliente().getCpf());
         animal.setCliente(cliente);
 
-        // Você pode precisar adicionar um campo para associar o veterinário, caso ainda
-        // não tenha feito isso
         MedVet medvet = medVetService.FindByCRMV(animal.getMedVet().getCrmv());
         animal.setMedVet(medvet);
 

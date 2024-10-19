@@ -58,16 +58,17 @@ public class ClienteController {
     @PostMapping("/login")
     public String processarLogin(@RequestParam String cpf,
                                  @RequestParam String senha,
-                                 Model model) {
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
         Cliente clienteCPF = clienteService.findByCPF(cpf);
 
-        if (clienteCPF.getSenha().equals(senha)) {
+        if (clienteCPF != null && clienteCPF.getSenha().equals(senha)) {
             // Se a senha estiver correta
-            return "redirect:/cliente/"+cpf+"/home"; // Redireciona para a página inicial do cliente
+            return "redirect:/cliente/"+clienteCPF.getCpf()+"/home"; // Redireciona para a página inicial do cliente
         } else {
             // Se a senha estiver incorreta
-            model.addAttribute("erro", "Senha incorreta");
-            return "redirect: /cliente/login"; // Retorna para a página de login
+            redirectAttributes.addFlashAttribute("error", "login ou senha inválidos");
+            return "redirect:/cliente/login"; // Retorna para a página de login
         }
     }
 

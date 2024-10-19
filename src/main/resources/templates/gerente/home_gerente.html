@@ -93,7 +93,11 @@
 
     <!-- Seção de Clientes -->
     <div class="section">
-        <h2>Clientes Registrados</h2>
+        <h2>Clientes Registrados
+            <form th:action="@{/gerente/logs}" method="get">
+                <button type="submit" class="btn btn-add">Logs</button>
+            </form>
+        </h2>
         <table>
             <thead>
             <tr>

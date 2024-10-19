@@ -1,5 +1,6 @@
 package com.petshop.petshop_system.controller;
 
+import com.petshop.petshop_system.entities.Cliente;
 import com.petshop.petshop_system.entities.Gerente;
 import com.petshop.petshop_system.entities.Item;
 import com.petshop.petshop_system.entities.MedVet;
@@ -10,7 +11,8 @@ import com.petshop.petshop_system.services.MedVetService;
 import org.springframework.ui.Model;
 import com.petshop.petshop_system.services.GerenteService;
 
-import java.math.BigDecimal;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,13 +42,13 @@ public class GerenteController {
 
 
     @PostMapping("/login")
-    public String logar(Model model, @RequestParam String login, @RequestParam String senha) {
+    public String logar(Model model, @RequestParam String login, @RequestParam String senha, RedirectAttributes redirectAttributes) {
         Gerente gerente = gerenteService.findByLogin(login);
         // Criar lógica para o login
-        if (gerente != null) {
+        if (gerente != null && gerente.getSenha().equals(senha)) {
             return "redirect:/gerente/home"; // Redireciona para a página do veterinário com a lista dos animais
         } else {
-            model.addAttribute("error", "Login ou senha inválidos");
+            redirectAttributes.addFlashAttribute("error", "login ou senha inválidos");
             return "redirect:/gerente/login"; // Retorna para o login com erro
         }
     }
@@ -59,11 +61,12 @@ public class GerenteController {
         return "/gerente/home_gerente";
     }
 
-   @GetMapping("/cadastro")
+    @GetMapping("/cadastrarVet")
     public String cadastro(Model model) {
-        model.addAttribute("veterinario", new MedVet());
-        return "/gerente/veterinario_form";
+        model.addAttribute("medVet", new MedVet());
+        return "gerente/veterinario_form"; // Retorna a view "veterinario_form.html" dentro do diretório "gerente"
     }
+
 
     @PostMapping("/cadastro")
     public String salvarMedVet(@ModelAttribute MedVet MedVet) {
@@ -73,7 +76,7 @@ public class GerenteController {
 
     @GetMapping("/atualizar")
     public String atualizar(@RequestParam String crmv, Model model) {
-        model.addAttribute("veterinario", medVetService.FindByCRMV(crmv));
+        model.addAttribute("medVet", medVetService.FindByCRMV(crmv));
         return "/gerente/veterinario_update";
     }
 
@@ -90,6 +93,12 @@ public class GerenteController {
         return "redirect:/gerente/home";
     }
 
+    @PostMapping("/deletar/cliente")
+    public String deletarCliente(@RequestParam String cpf) {
+        Cliente cliente = clienteService.findByCPF(cpf);
+        clienteService.excluirCliente(cliente);
+        return "redirect:/gerente/home";
+    }
 
 
 

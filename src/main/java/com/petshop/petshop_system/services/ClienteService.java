@@ -21,6 +21,10 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    public void excluirCliente(Cliente cliente) {
+        clienteRepository.delete(cliente);
+    }
+
     public Cliente findByCPF(String cpf) {
         return clienteRepository.findByCpf(cpf);
     }

@@ -42,8 +42,11 @@ public class Animal {
     @Column(nullable=false)
     private String Esterilizacao;
 
-    @Column
+    @Column(nullable = false)
     private Integer idade;
+
+    @Column(nullable=false)
+    private String especie;
 
     @ManyToOne
     @JoinColumn(name="cpf")

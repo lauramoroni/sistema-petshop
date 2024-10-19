@@ -65,23 +65,26 @@ public class AnimalController {
         return "redirect:/veterinario/{crmv}/cliente/{cpf}/animais"; // Redireciona para a lista de animais
     }
 
-    @GetMapping("/atualizar")
-    public String atualizar(@RequestParam Long id_animal, Model model) {
+    @GetMapping("/atualizar/{crmv}/{id_animal}")
+    public String atualizar(@PathVariable Long id_animal, @PathVariable String crmv, Model model) {
         model.addAttribute("animal", animalService.findById(id_animal));
+        model.addAttribute("crmv", crmv); 
+        model.addAttribute("id_animal", id_animal); 
         return "/animais/animal_update";
     }
 
-    @PostMapping("/atualizar")
-    public String atualizarItem(@ModelAttribute Animal animal, @RequestParam Long id_animal, @RequestParam String crmv) {
+    @PostMapping("/atualizar/{crmv}/{id_animal}")
+    public String atualizarItem(@ModelAttribute Animal animal, @PathVariable Long id_animal, @PathVariable String crmv,
+            Model model) {
         animalService.update(id_animal, animal);
-        return "redirect:/veterinario/" + crmv;
-
+        return "redirect:/animal/" + crmv + "/" + id_animal;
     }
 
     @PostMapping("/deletar")
-    public String deletarItem(@RequestParam Long id_animal, @RequestParam String crmv) {
+    public String deletarAnimal(@RequestParam Long id_animal, @RequestParam String crmv, Model model) {
         animalService.delete(id_animal);
-       
+        model.addAttribute("crmv", crmv); 
+
         return "redirect:/veterinario/" + crmv;
     }
 

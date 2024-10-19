@@ -67,8 +67,8 @@ public class HemogramaController {
         return "animais/exame_form";
     }
 
-    @PostMapping("/teste/{id_hemograma}")
-    public String teste(@PathVariable("id_hemograma") Long id_hemograma, @RequestParam Long id_animal, @RequestParam String crmv, Model model) {
+    @PostMapping("/{id_hemograma}")
+    public String exportPdf(@PathVariable("id_hemograma") Long id_hemograma, @RequestParam Long id_animal, @RequestParam String crmv, Model model) {
 
         Hemograma hemograma = hemogramaService.findById(id_hemograma);
         Animal animal = animalService.findById(id_animal);

@@ -6,13 +6,29 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   </head>
+  <button id="darkModeToggle" class="btn">
+    <a>
+      <img
+        src="/images/moon.png"
+        alt="Imagem da lua"
+        class="imagem-botao"
+      />
+    </a>
+  </button>
+  <script th:src="@{/js/darkModeToggle.js}"></script>
   <body>
     <div id="exame-info">
       <div id="animal-info">
         <h3>Informações do Animal:</h3>
         <p><strong>Nome:</strong> <span th:text="${animal.nome}"></span></p>
+        <p>
+          <strong>Espécie:</strong> <span th:text="${animal.especie}"></span>
+        </p>
         <p><strong>Sexo:</strong> <span th:text="${animal.sexo}"></span></p>
-        <p><strong>Idade:</strong> <span th:text="${animal.idade}"></span></p>
+        <p>
+          <strong>Idade:</strong>
+          <span th:text="${animal.idade} + ' anos'"></span>
+        </p>
         <p>
           <strong>Esterilização:</strong>
           <span th:text="${animal.esterilizacao}"></span>
@@ -41,27 +57,27 @@
         </h3>
         <p>
           <strong>Hemácias:</strong>
-          <span th:text="${hemograma.hemacias}"></span>
+          <span th:text="${hemograma.hemacias} + ' (milhões/mm3)'"></span>
         </p>
         <p>
           <strong>Hematócrito:</strong>
-          <span th:text="${hemograma.hematocrito}"></span>
+          <span th:text="${hemograma.hematocrito} + ' %'"></span>
         </p>
         <p>
           <strong>Hemoglobina:</strong>
-          <span th:text="${hemograma.hemoglobina}"></span>
+          <span th:text="${hemograma.hemoglobina} + ' g/dL'"></span>
         </p>
         <p>
           <strong>Leucócitos:</strong>
-          <span th:text="${hemograma.leucocitos}"></span>
+          <span th:text="${hemograma.leucocitos} + '/mm3'"></span>
         </p>
         <p>
           <strong>Linfócitos:</strong>
-          <span th:text="${hemograma.linfocitos}"></span>
+          <span th:text="${hemograma.linfocitos} + '/mcL'"></span>
         </p>
         <p>
           <strong>Plaquetas:</strong>
-          <span th:text="${hemograma.plaquetas}"></span>
+          <span th:text="${hemograma.plaquetas} + '/mcL'"></span>
         </p>
         <p>
           <strong>Observações:</strong>
@@ -72,37 +88,6 @@
 
     <button id="download-pdf">PDF</button>
 
-    <script>
-      // Script para converter o conteúdo em PDF
-      document
-        .getElementById("download-pdf")
-        .addEventListener("click", function () {
-          var element = document.getElementById("exame-info");
-
-          // Para buscar o valor de hemograma.id_hemograma dinamicamente via Thymeleaf
-          var hemogramaId = document
-            .querySelector("#hemograma-card h3 span")
-            .textContent.trim();
-
-          var opt = {
-            margin: 0.5,
-            filename: "exame_" + hemogramaId + ".pdf",
-            html2canvas: {
-              scale: 2, // Aumenta a escala para melhor qualidade da imagem
-              useCORS: true, // Habilita CORS para imagens externas, se necessário
-              logging: true, // Para log de informações durante a geração
-              allowTaint: true, // Permite que imagens sejam tainted, se necessário
-            },
-            jsPDF: {
-                unit: 'in',
-                format: 'a4', // Formato da página (ex: 'a4', 'letter', etc.)
-                orientation: 'portrait' // Orientação da página
-              },
-            pagebreak: { mode: ["avoid-all", "css", "legacy"] },
-          };
-
-          html2pdf().set(opt).from(element).save();
-        });
-    </script>
+    <script th:src="@{/js/generatePdf.js}"></script>
   </body>
 </html>

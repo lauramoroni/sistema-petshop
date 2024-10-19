@@ -101,7 +101,7 @@ public class ClienteController {
     @PostMapping("/{cpf}/comprar-item")
     public String comprarItem(@PathVariable String cpf, Model model, @RequestParam Long itemId) {
         clienteService.comprarItem(cpf, itemId);
-        return "redirect:/cliente/x{cpf}/home";
+        return "redirect:/cliente/{cpf}/home";
     }
 
     @GetMapping("/{cpf}/confirmar_compra/{itemId}")

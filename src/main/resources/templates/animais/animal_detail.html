@@ -20,6 +20,12 @@
         <div class="container my-4">
             <h1 class="text-center">Detalhes do Animal: <span th:text="${animal.nome}"></span></h1>
 
+            <div class="text-center my-4">
+                <img th:if="${animal.especie == 'Felino'}" th:src="@{/images/felino.png}" alt="Felino" class="animal-image" />
+                <img th:if="${animal.especie == 'Canino'}" th:src="@{/images/canino.png}" alt="Canino" class="animal-image" />
+            </div>
+            
+
             <div class="btn-group text-center my-3">
                 <a class="btn" th:href="@{'/exame/' + ${crmv} + '/' + ${id_animal}}">Novo Exame</a>
                 <form th:action="@{'/animal/atualizar/' + ${crmv} + '/' + ${id_animal}}" method="get" class="d-inline">

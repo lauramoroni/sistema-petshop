@@ -4,5 +4,5 @@ import com.petshop.petshop_system.entities.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface LogRepository extends JpaRepository<Log, Long> {
+public interface LogRepository extends JpaRepository<Log, String> {
 }

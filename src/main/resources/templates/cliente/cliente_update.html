@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <title>Cadastro de Cliente</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            padding-top: 0px; /* Ajusta a margem superior do corpo */
+        }
+        .container {
+            margin-top: -130px; /* Ajusta a margem superior do container */
+        }
+    </style>
+    <button id="darkModeToggle" class="btn">
+        <a>
+          <img
+            src="/images/moon.png"
+            alt="Imagem da lua"
+            class="imagem-botao"
+          />
+        </a>
+      </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -11,6 +29,7 @@
     <form th:action="@{/cliente/{cpf}/editar-cliente(cpf=${cliente.cpf})}" th:object="${cliente}" method="post">
         <!-- Campos de Cliente -->
         <div class="mb-3">
+            <label for="" class=""></label>
             <label for="nome" class="form-label">Nome</label>
             <input type="text" th:field="*{nome}" id="nome" class="form-control" placeholder="Nome do cliente">
         </div>
@@ -37,7 +56,7 @@
         </div>
 
         <!-- Campos de Endereço -->
-        <h4>Endereço</h4>
+        <h2>Endereço</h2>
         <div class="mb-3">
             <label for="cep" class="form-label">CEP</label>
             <input type="text" th:field="*{endereco.cep}" id="cep" class="form-control" placeholder="CEP">

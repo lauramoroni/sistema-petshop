@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <title>Cadastro de Médico Veterinário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        body {
+            padding-top: 0px; /* Ajusta a margem superior do corpo */
+        }
+        .form-control {
+            width: 90%;
+        }
+        .container {
+            margin-top: -130px; /* Ajusta a margem superior do container */
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>
+
+<div class="container my + 1000">
     <h2>Cadastro de Médico Veterinário</h2>
     <form th:action="@{/gerente/cadastro}" th:object="${medVet}" method="post">
         <!-- Campos de Pessoa -->
         <div class="mb-3">
+            <label for="" class=""></label>
             <label for="nome" class="form-label">Nome</label>
             <input type="text" th:field="*{nome}" id="nome" class="form-control" placeholder="Nome do Médico Veterinário">
         </div>
@@ -53,7 +71,7 @@
         </div>
 
         <!-- Campos de Endereço -->
-        <h4>Endereço</h4>
+        <h2>Endereço</h2>
         <div class="mb-3">
             <label for="cep" class="form-label">CEP</label>
             <input type="text" th:field="*{endereco.cep}" id="cep" class="form-control" placeholder="CEP">

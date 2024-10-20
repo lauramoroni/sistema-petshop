@@ -4,19 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Monitoramento - Clínica Veterinária</title>
+    <link rel="stylesheet" href="/css/style.css" />
     <style>
+                
+       
         body {
-            font-family: Arial, sans-serif;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+        } 
+        form {
+            background-color: #f4f4f4;
+            border:0px ;
+            box-shadow: 0 0 0px;
         }
-
+        form input, form select, form textarea{
+            margin-left: 0px;
+            margin-right: 45px;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 90%;
+        }
         .container {
-            width: 80%;
+            margin-top: -130px;
+    
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
@@ -31,8 +47,8 @@
         }
 
         .section h2 {
-            color: #007BFF;
-            border-bottom: 2px solid #007BFF;
+            color: #009688;
+            border-bottom: 2px solid #009688;
             padding-bottom: 10px;
             display: flex;
             justify-content: space-between;
@@ -55,8 +71,8 @@
         }
 
         th {
-            background-color: #007BFF;
-            color: #fff;
+            background-color: #009688;
+            
         }
 
         tr:nth-child(even) {
@@ -71,23 +87,41 @@
         }
 
         .btn-add {
-            background-color: #007BFF;
-            color: #fff;
+            width: 50%;
+            background-color: #009688;
+            
         }
 
         .btn-update {
+            width: 100%;
             background-color: #28a745;
             color: #fff;
         }
 
         .btn-delete {
+            width: 100%;
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .dark-mode .btn-update {
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .dark-mode .btn-delete {
+            width: 100%;
             background-color: #dc3545;
             color: #fff;
         }
     </style>
+    
 </head>
 <body>
-
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>  
 <div class="container">
     <h1>Painel de Monitoramento</h1>
 
@@ -164,53 +198,51 @@
     </div>
 
     <div class="section">
-    <h2>Produtos em estoque
-        <form th:action="@{/item/cadastro}" method="get">
-            <button type="submit" class="btn btn-add">Adicionar item</button>
-        </form>
-    </h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Produto</th>
-            <th>Descrição</th>
-            <th>Quantidade em Estoque</th>
-            <th>Preço Unitário (R$)</th>
-            <th>Aplicar Desconto</th>
-            <th>Atualizar</th>
-            <th>Deletar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${itemList}">
-            <td th:text="${item.getNome()}"></td>
-            <td th:text="${item.getDescrição()}"></td>
-            <td th:text="${item.getQuantidade()}"></td>
-            <td th:text="${item.getPreco()}"></td>
-            <td>
-                <form th:action="@{/item/aplicar-desconto}" method="post">
-                    <input type="hidden" th:value="${item.getId()}" name="itemId"/>
-                    <input type="number" name="percentualDesconto" min="0" max="100" placeholder="Desconto (%)" required/>
-                    <button type="submit" class="btn btn-desconto">Aplicar</button>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{/item/atualizar}" method="get">
-                    <input type="hidden" th:value="${item.getId()}" name="itemId"/>
-                    <button type="submit" class="btn btn-update"><i class="fas fa-edit"></i> Atualizar</button>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{/item/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este item?');">
-                    <input type="hidden" th:value="${item.getId()}" name="itemId"/>
-                    <button type="submit" class="btn btn-delete"><i class="fas fa-trash"></i> Deletar</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <h2>Produtos em Estoque
+            <form th:action="@{/item/cadastro}" method="get">
+                <button type="submit" class="btn btn-add">Adicionar item</button>
+            </form>
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Descrição</th>
+                    <th>Quantidade em Estoque</th>
+                    <th>Preço Unitário (R$)</th>
+                    <th>Aplicar Desconto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${itemList}">
+                    <td th:text="${item.getNome()}"></td>
+                    <td th:text="${item.getDescrição()}"></td>
+                    <td th:text="${item.getQuantidade()}"></td>
+                    <td th:text="${item.getPreco()}"></td>
+                    <td>
+                        <form th:action="@{/item/aplicar-desconto}" method="post">
+                            <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                            <input type="number" name="percentualDesconto" min="0" max="100" placeholder="Desconto (%)" required/>
+                            <button type="submit" class="btn btn-desconto">Aplicar</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/item/atualizar}" method="get">
+                            <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                            <button type="submit" class="btn btn-update">Atua</button>
+                        </form>
+                        <form th:action="@{/item/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este item?');">
+                            <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                            <button type="submit" class="btn btn-delete">Del</button>
+                        </form>
+                    </td>
+                </tr>
+                <!-- Repetir para outros produtos -->
+            </tbody>
+        </table>
     </div>
-</div>
+</div>    
 
 </body>
 </html>

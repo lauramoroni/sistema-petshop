@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualização de Médico Veterinário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        body {
+            padding-top: 0px; /* Ajusta a margem superior do corpo */
+        }
+        .form-control {
+            width: 90%;
+        }
+        .container {
+            margin-top: -130px; /* Ajusta a margem superior do container */
+        }
+    </style>
+</head>
+<body>
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>
+<div class="container">
+    <h2>Cadastro de Médico Veterinário</h2>
+    <form th:action="@{/gerente/atualizar}" th:object="${medVet}" method="post">
+        <!-- Campos de Pessoa -->
+        <div class="mb-3">
+            <label for="" class=""></label>
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" id="nome" class="form-control" placeholder="Nome do Médico Veterinário">
+        </div>
+
+        <div class="mb-3">
+            <label for="celular" class="form-label">Celular</label>
+            <input type="text" th:field="*{celular}" id="celular" class="form-control" placeholder="Celular do Médico Veterinário">
+        </div>
+
+        <div class="mb-3">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" th:field="*{telefone}" id="telefone" class="form-control" placeholder="Telefone do Médico Veterinário">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Email do Médico Veterinário">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="text" th:field="*{cpf}" id="cpf" class="form-control" placeholder="CPF do Médico Veterinário">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" th:field="*{senha}" id="senha" class="form-control" placeholder="Senha">
+        </div>
+
+        <!-- Campos Específicos de MedVet -->
+        <div class="mb-3">
+            <label for="crmv" class="form-label">CRMV</label>
+            <input type="text" th:field="*{crmv}" id="crmv" class="form-control" placeholder="CRMV">
+        </div>
+
+        <div class="mb-3">
+            <label for="especialidade" class="form-label">Especialidade</label>
+            <input type="text" th:field="*{especialidade}" id="especialidade" class="form-control" placeholder="Especialidade">
+        </div>
+
+        <!-- Campos de Endereço -->
+        <h2>Endereço</h2>
+        <div class="mb-3">
+            <label for="cep" class="form-label">CEP</label>
+            <input type="text" th:field="*{endereco.cep}" id="cep" class="form-control" placeholder="CEP">
+        </div>
+        <div class="mb-3">
+            <label for="rua" class="form-label">Rua</label>
+            <input type="text" th:field="*{endereco.rua}" id="rua" class="form-control" placeholder="Rua">
+        </div>
+        <div class="mb-3">
+            <label for="bairro" class="form-label">Bairro</label>
+            <input type="text" th:field="*{endereco.bairro}" id="bairro" class="form-control" placeholder="Bairro">
+        </div>
+        <div class="mb-3">
+            <label for="numero" class="form-label">Número</label>
+            <input type="text" th:field="*{endereco.numero}" id="numero" class="form-control" placeholder="Número">
+        </div>
+        <div class="mb-3">
+            <label for="complemento" class="form-label">Complemento</label>
+            <input type="text" th:field="*{endereco.complemento}" id="complemento" class="form-control" placeholder="Complemento">
+        </div>
+        <div class="mb-3">
+            <label for="cidade" class="form-label">Cidade</label>
+            <input type="text" th:field="*{endereco.cidade}" id="cidade" class="form-control" placeholder="Cidade">
+        </div>
+        <div class="mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <input type="text" th:field="*{endereco.estado}" id="estado" class="form-control" placeholder="Estado">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+</body>
+</html>

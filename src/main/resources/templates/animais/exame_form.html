@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Exame</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            padding-top: 0px; /* Ajusta a margem superior do corpo */
+        }
+        .container {
+            margin-top: -130px; /* Ajusta a margem superior do container */
+        }
+    </style>
+</head>
+
+<body>
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>
+    
+    <div class="container my +1000">
+        <h1 class="text-center">Hemograma</h1>
+        <form th:action="@{'/exame/' + ${medVet.crmv} + '/' + ${animal.id}}" th:object="${hemograma}" method="post" class="mt-4">
+            <h2 class="text-left mb-4" th:text="'Cadastrar Hemograma para ' + ${animal.nome}">Cadastrar Hemograma para Animal</h2>
+
+            <div class="form-group">
+                <label for="hemacias">Hemácias:</label>
+                <input type="number" step="0.01" id="hemacias" th:field="*{hemacias}" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="hematocrito">Hematócrito:</label>
+                <input type="number" step="0.01" id="hematocrito" th:field="*{hematocrito}" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="hemoglobina">Hemoglobina:</label>
+                <input type="number" step="0.01" id="hemoglobina" th:field="*{hemoglobina}" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="leucocitos">Leucócitos:</label>
+                <input type="number" step="0.01" id="leucocitos" th:field="*{leucocitos}" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="linfocitos">Linfócitos:</label>
+                <input type="number" step="0.01" id="linfocitos" th:field="*{linfocitos}" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="plaquetas">Plaquetas:</label>
+                <input type="number" step="0.01" id="plaquetas" th:field="*{plaquetas}" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observações:</label>
+                <input type="text" id="observacoes" th:field="*{observacoes}" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Salvar Exame</button>
+        </form>
+    </div>
+
+</body>
+</html>

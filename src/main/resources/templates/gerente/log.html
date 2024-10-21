@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logs de Modificações</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        body {
+            padding-top: 0px; /* Ajusta a margem superior do corpo */
+        }
+        .form-control {
+            width: 90%;
+        }
+        .container {
+            margin-top: -130px; /* Ajusta a margem superior do container */
+        }
+    </style>
+</head>
+<body>
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>
+<h1>Logs de Modificações</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Cliente</th>
+        <th>Operação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="log : ${logs}">
+        <td th:text="${log.date}"></td>
+        <td th:text="${log.cliente}"></td>
+        <td th:text="${log.modificacao}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

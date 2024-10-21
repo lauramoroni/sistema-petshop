@@ -1,47 +1,24 @@
 package com.petshop.petshop_system.entities;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Entity
+@MappedSuperclass
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Table(name = "tb_pessoa")
-@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
-@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_pessoa")
-    private UUID id;
+    @Column
+    private String cpf;
 
     @Column(length = 50, nullable=false)
     private String nome;
-
-    @Column(length = 50)
-    private String nacionalidade;
 
     @Column(length = 9)
     private String celular;
@@ -52,32 +29,27 @@ public abstract class Pessoa {
     @Column(length = 50)
     private String email;
 
-    @Column(nullable=false)
-    private LocalDateTime data_cadastro;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "id_endereco")
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-    private List<Animal> animais;
+    @Column(length = 20)
+    private String login;
+
+    @Column(length = 20)
+    private String senha;
 
 
-    public Pessoa(){
-        this.data_cadastro = LocalDateTime.now();
-        this.animais = new ArrayList<>();
-    }
 
-    public Pessoa(UUID id, String nome, String nacionalidade, String celular, String telefone, String email,
-            LocalDateTime data_cadastro, Endereco endereco) {
-        this.id = id;
+
+    public Pessoa(String cpf, String nome, String celular, String telefone, String email, Endereco endereco, String login, String senha) {
+        this.cpf = cpf;
         this.nome = nome;
-        this.nacionalidade = nacionalidade;
         this.celular = celular;
         this.telefone = telefone;
         this.email = email;
-        this.data_cadastro = LocalDateTime.now();
         this.endereco = endereco;
-        this.animais = new ArrayList<>();
+        this.login = login;
+        this.senha = senha;
     }
 }

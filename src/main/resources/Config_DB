@@ -1,0 +1,112 @@
+INSERT INTO tb_endereco (numero, cep, id_endereco, bairro, cidade, complemento, estado, ponto_referencia, rua) VALUES
+(101, '12345678', '550e8400-e29b-41d4-a716-446655440020', 'Centro', 'São Paulo', 'Apto 1', 'SP', 'Próximo ao shopping', 'Rua A'),
+(102, '23456789', '550e8400-e29b-41d4-a716-446655440021', 'Jardins', 'São Paulo', 'Casa', 'SP', 'Próximo ao parque', 'Rua B'),
+(103, '34567890', '550e8400-e29b-41d4-a716-446655440022', 'Itaim', 'São Paulo', 'Apto 2', 'SP', 'Próximo à estação', 'Rua C'),
+(104, '45678901', '550e8400-e29b-41d4-a716-446655440023', 'Vila Madalena', 'São Paulo', 'Casa', 'SP', 'Próximo ao bar', 'Rua D'),
+(105, '56789012', '550e8400-e29b-41d4-a716-446655440024', 'Liberdade', 'São Paulo', 'Apto 3', 'SP', 'Próximo ao mercado', 'Rua E'),
+(106, '67890123', '550e8400-e29b-41d4-a716-446655440025', 'Pinheiros', 'São Paulo', 'Casa', 'SP', 'Próximo à farmácia', 'Rua F'),
+(107, '78901234', '550e8400-e29b-41d4-a716-446655440026', 'Moema', 'São Paulo', 'Apto 4', 'SP', 'Próximo ao supermercado', 'Rua G'),
+(108, '89012345', '550e8400-e29b-41d4-a716-446655440027', 'Bela Vista', 'São Paulo', 'Casa', 'SP', 'Próximo ao hospital', 'Rua H'),
+(109, '90123456', '550e8400-e29b-41d4-a716-446655440028', 'Santana', 'São Paulo', 'Apto 5', 'SP', 'Próximo à escola', 'Rua I'),
+(110, '01234567', '550e8400-e29b-41d4-a716-446655440029', 'Vila Olímpia', 'São Paulo', 'Casa', 'SP', 'Próximo ao centro', 'Rua J'),
+(111, '12312312', '550e8400-e29b-41d4-a716-446655440030', 'Tatuapé', 'São Paulo', 'Apto 6', 'SP', 'Próximo ao parque', 'Rua K'),
+(112, '23423423', '550e8400-e29b-41d4-a716-446655440031', 'Ibirapuera', 'São Paulo', 'Casa', 'SP', 'Próximo ao teatro', 'Rua L'),
+(113, '34534534', '550e8400-e29b-41d4-a716-446655440032', 'Lapa', 'São Paulo', 'Apto 7', 'SP', 'Próximo ao shopping', 'Rua M'),
+(114, '45645645', '550e8400-e29b-41d4-a716-446655440033', 'Perdizes', 'São Paulo', 'Casa', 'SP', 'Próximo ao museu', 'Rua N'),
+(115, '56756756', '550e8400-e29b-41d4-a716-446655440034', 'Vila Mariana', 'São Paulo', 'Apto 8', 'SP', 'Próximo ao parque', 'Rua O'),
+(116, '67867867', '550e8400-e29b-41d4-a716-446655440035', 'Campo Belo', 'São Paulo', 'Casa', 'SP', 'Próximo ao supermercado', 'Rua P'),
+(117, '78978978', '550e8400-e29b-41d4-a716-446655440036', 'Butantã', 'São Paulo', 'Apto 9', 'SP', 'Próximo ao hospital', 'Rua Q'),
+(118, '89089089', '550e8400-e29b-41d4-a716-446655440037', 'Jardim Paulista', 'São Paulo', 'Casa', 'SP', 'Próximo ao bar', 'Rua R'),
+(119, '90190190', '550e8400-e29b-41d4-a716-446655440038', 'Vila Curuçá', 'São Paulo', 'Apto 10', 'SP', 'Próximo ao mercado', 'Rua S'),
+(120, '01201201', '550e8400-e29b-41d4-a716-446655440039', 'Jardim São Paulo', 'São Paulo', 'Casa', 'SP', 'Próximo à escola', 'Rua T');
+
+INSERT INTO tb_cliente (celular, telefone, id_endereco, login, senha, email, nome, cpf) VALUES
+('987654321', '912345678', '550e8400-e29b-41d4-a716-446655440020', 'cliente1', 'senha1', 'cliente1@mail.com', 'Carlos', '12345678901'),
+('987654322', '912345679', '550e8400-e29b-41d4-a716-446655440021', 'cliente2', 'senha2', 'cliente2@mail.com', 'Ana', '12345678902'),
+('987654323', '912345680', '550e8400-e29b-41d4-a716-446655440022', 'cliente3', 'senha3', 'cliente3@mail.com', 'Bruno', '12345678903'),
+('987654324', '912345681', '550e8400-e29b-41d4-a716-446655440023', 'cliente4', 'senha4', 'cliente4@mail.com', 'Lucia', '12345678904'),
+('987654325', '912345682', '550e8400-e29b-41d4-a716-446655440024', 'cliente5', 'senha5', 'cliente5@mail.com', 'Felipe', '12345678905'),
+('987654326', '912345683', '550e8400-e29b-41d4-a716-446655440025', 'cliente6', 'senha6', 'cliente6@mail.com', 'Mariana', '12345678906'),
+('987654327', '912345684', '550e8400-e29b-41d4-a716-446655440026', 'cliente7', 'senha7', 'cliente7@mail.com', 'Ricardo', '12345678907'),
+('987654328', '912345685', '550e8400-e29b-41d4-a716-446655440027', 'cliente8', 'senha8', 'cliente8@mail.com', 'Patricia', '12345678908'),
+('987654329', '912345686', '550e8400-e29b-41d4-a716-446655440028', 'cliente9', 'senha9', 'cliente9@mail.com', 'Pedro', '12345678909'),
+('987654330', '912345687', '550e8400-e29b-41d4-a716-446655440029', 'cliente10', 'senha10', 'cliente10@mail.com', 'Julia', '12345678910'),
+('987654331', '912345688', '550e8400-e29b-41d4-a716-446655440030', 'cliente11', 'senha11', 'cliente11@mail.com', 'André', '12345678911'),
+('987654332', '912345689', '550e8400-e29b-41d4-a716-446655440031', 'cliente12', 'senha12', 'cliente12@mail.com', 'Sofia', '12345678912'),
+('987654333', '912345690', '550e8400-e29b-41d4-a716-446655440032', 'cliente13', 'senha13', 'cliente13@mail.com', 'Gustavo', '12345678913'),
+('987654334', '912345691', '550e8400-e29b-41d4-a716-446655440033', 'cliente14', 'senha14', 'cliente14@mail.com', 'Fernanda', '12345678914'),
+('987654335', '912345692', '550e8400-e29b-41d4-a716-446655440034', 'cliente15', 'senha15', 'cliente15@mail.com', 'Roberto', '12345678915'),
+('987654336', '912345693', '550e8400-e29b-41d4-a716-446655440035', 'cliente16', 'senha16', 'cliente16@mail.com', 'Marcos', '12345678916'),
+('987654337', '912345694', '550e8400-e29b-41d4-a716-446655440036', 'cliente17', 'senha17', 'cliente17@mail.com', 'Luana', '12345678917'),
+('987654338', '912345695', '550e8400-e29b-41d4-a716-446655440037', 'cliente18', 'senha18', 'cliente18@mail.com', 'Vinícius', '12345678918'),
+('987654339', '912345696', '550e8400-e29b-41d4-a716-446655440038', 'cliente19', 'senha19', 'cliente19@mail.com', 'Cláudia', '12345678919'),
+('987654340', '912345697', '550e8400-e29b-41d4-a716-446655440039', 'cliente20', 'senha20', 'cliente20@mail.com', 'Leonardo', '12345678920');
+
+INSERT INTO tb_medvet (celular, telefone, crmv, id_endereco, login, senha, email, nome, cpf, especialidade) VALUES
+('912345718', '912345719', '12345678901', '550e8400-e29b-41d4-a716-446655440020', 'medvet1', 'senha1', 'medvet1@mail.com', 'Dra. Ana', '12345678921', 'Veterinária'),
+('912345720', '912345721', '12345678902', '550e8400-e29b-41d4-a716-446655440021', 'medvet2', 'senha2', 'medvet2@mail.com', 'Dra. Maria', '12345678922', 'Veterinária'),
+('912345722', '912345723', '12345678903', '550e8400-e29b-41d4-a716-446655440022', 'medvet3', 'senha3', 'medvet3@mail.com', 'Dra. Juliana', '12345678923', 'Veterinária'),
+('912345724', '912345725', '12345678904', '550e8400-e29b-41d4-a716-446655440023', 'medvet4', 'senha4', 'medvet4@mail.com', 'Dr. João', '12345678924', 'Veterinário'),
+('912345726', '912345727', '12345678905', '550e8400-e29b-41d4-a716-446655440024', 'medvet5', 'senha5', 'medvet5@mail.com', 'Dra. Fernanda', '12345678925', 'Veterinária'),
+('912345728', '912345729', '12345678906', '550e8400-e29b-41d4-a716-446655440025', 'medvet6', 'senha6', 'medvet6@mail.com', 'Dr. Carlos', '12345678926', 'Veterinário'),
+('912345730', '912345731', '12345678907', '550e8400-e29b-41d4-a716-446655440026', 'medvet7', 'senha7', 'medvet7@mail.com', 'Dra. Patrícia', '12345678927', 'Veterinária'),
+('912345732', '912345733', '12345678908', '550e8400-e29b-41d4-a716-446655440027', 'medvet8', 'senha8', 'medvet8@mail.com', 'Dr. Felipe', '12345678928', 'Veterinário'),
+('912345734', '912345735', '12345678909', '550e8400-e29b-41d4-a716-446655440028', 'medvet9', 'senha9', 'medvet9@mail.com', 'Dra. Luiza', '12345678929', 'Veterinária'),
+('912345736', '912345737', '12345678910', '550e8400-e29b-41d4-a716-446655440029', 'medvet10', 'senha10', 'medvet10@mail.com', 'Dr. Ricardo', '12345678930', 'Veterinário'),
+('912345738', '912345739', '12345678911', '550e8400-e29b-41d4-a716-446655440030', 'medvet11', 'senha11', 'medvet11@mail.com', 'Dra. Beatriz', '12345678931', 'Veterinária'),
+('912345740', '912345741', '12345678912', '550e8400-e29b-41d4-a716-446655440031', 'medvet12', 'senha12', 'medvet12@mail.com', 'Dr. André', '12345678932', 'Veterinário'),
+('912345742', '912345743', '12345678913', '550e8400-e29b-41d4-a716-446655440032', 'medvet13', 'senha13', 'medvet13@mail.com', 'Dra. Carla', '12345678933', 'Veterinária'),
+('912345744', '912345745', '12345678914', '550e8400-e29b-41d4-a716-446655440033', 'medvet14', 'senha14', 'medvet14@mail.com', 'Dr. Fernando', '12345678934', 'Veterinário'),
+('912345746', '912345747', '12345678915', '550e8400-e29b-41d4-a716-446655440034', 'medvet15', 'senha15', 'medvet15@mail.com', 'Dra. Renata', '12345678935', 'Veterinária'),
+('912345748', '912345749', '12345678916', '550e8400-e29b-41d4-a716-446655440035', 'medvet16', 'senha16', 'medvet16@mail.com', 'Dr. Pedro', '12345678936', 'Veterinário'),
+('912345750', '912345751', '12345678917', '550e8400-e29b-41d4-a716-446655440036', 'medvet17', 'senha17', 'medvet17@mail.com', 'Dra. Vanessa', '12345678937', 'Veterinária'),
+('912345752', '912345753', '12345678918', '550e8400-e29b-41d4-a716-446655440037', 'medvet18', 'senha18', 'medvet18@mail.com', 'Dr. Rodrigo', '12345678938', 'Veterinário'),
+('912345754', '912345755', '12345678919', '550e8400-e29b-41d4-a716-446655440038', 'medvet19', 'senha19', 'medvet19@mail.com', 'Dra. Lívia', '12345678939', 'Veterinária'),
+('912345756', '912345757', '12345678920', '550e8400-e29b-41d4-a716-446655440039', 'medvet20', 'senha20', 'medvet20@mail.com', 'Dr. Daniel', '12345678940', 'Veterinário');
+
+INSERT INTO tb_animal (id_animal, cpf, crmv, esterilizacao, nome, sexo) VALUES
+(1, '12345678901', '12345678921', 'Fértil', 'Rex', 'Macho'),
+(2, '12345678902', '12345678922', 'Vasectomizado', 'Luna', 'Fêmea'),
+(3, '12345678903', '12345678923', 'Castrado', 'Bingo', 'Macho'),
+(4, '12345678904', '12345678924', 'Fértil', 'Sasha', 'Fêmea'),
+(5, '12345678905', '12345678925', 'Vasectomizado', 'Buddy', 'Macho'),
+(6, '12345678906', '12345678926', 'Castrado', 'Bella', 'Fêmea'),
+(7, '12345678907', '12345678927', 'Fértil', 'Max', 'Macho'),
+(8, '12345678908', '12345678928', 'Vasectomizado', 'Molly', 'Fêmea'),
+(9, '12345678909', '12345678929', 'Castrado', 'Charlie', 'Macho'),
+(10, '12345678910', '12345678930', 'Fértil', 'Daisy', 'Fêmea'),
+(11, '12345678911', '12345678931', 'Vasectomizado', 'Rocky', 'Macho'),
+(12, '12345678912', '12345678932', 'Castrado', 'Lola', 'Fêmea'),
+(13, '12345678913', '12345678933', 'Fértil', 'Cooper', 'Macho'),
+(14, '12345678914', '12345678934', 'Vasectomizado', 'Sadie', 'Fêmea'),
+(15, '12345678915', '12345678935', 'Castrado', 'Tucker', 'Macho'),
+(16, '12345678916', '12345678936', 'Fértil', 'Ruby', 'Fêmea'),
+(17, '12345678917', '12345678937', 'Vasectomizado', 'Jake', 'Macho'),
+(18, '12345678918', '12345678938', 'Castrado', 'Chloe', 'Fêmea'),
+(19, '12345678919', '12345678939', 'Fértil', 'Dexter', 'Macho'),
+(20, '12345678901', '12345678940', 'Vasectomizado', 'Zoey', 'Fêmea'),
+(23, '12345678901', '12345678940', 'Fértil', 'Lipe', 'Macho'),
+(21, '12345678902', '12345678940', 'Vasectomizado', 'Bolinha', 'Macho'),
+(22, '12345678901', '12345678940', 'Castrado', 'Liz', 'Fêmea');
+
+CREATE VIEW vw_cliente_info AS
+SELECT cpf, nome, celular, email
+FROM tb_cliente;
+
+CREATE OR REPLACE FUNCTION fn_internar_animal()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.status = 'internado' or NEW.status THEN
+        INSERT INTO internacao (id_animal, crmv, data_internacao)
+        VALUES (NEW.id_animal, NEW.crmv, NOW());
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_internar_animal
+AFTER UPDATE ON tb_animal
+FOR EACH ROW
+WHEN (NEW.status = 'internado')
+EXECUTE FUNCTION fn_internar_animal();
+

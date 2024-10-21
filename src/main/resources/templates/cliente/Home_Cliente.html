@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Detalhes do Cliente</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Container Principal */
+        .container {
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: 40px auto;
+            transition: background-color 0.3s;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .section {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .section p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .add-animal-button, 
+        .buy-items-button {
+            background: #b94685;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .buy-items-button {
+            background: #e67e22;
+        }
+
+        .no-records {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animal-link {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .dark-mode body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+        }
+    
+        .dark-mode .container {
+            background-color: #333;
+        }
+    
+        .dark-mode .header h2, .dark-mode .section h3 {
+            color: #f0f0f0;
+        }
+    
+        .dark-mode .add-animal-button {
+            background-color: #b94685;
+        }
+    
+        .dark-mode .buy-items-button {
+            background-color: #d35400;
+        }
+    
+        .dark-mode .no-records {
+            color: #bbb;
+        }
+    </style>
+     
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/home" class="logo"></a>
+
+            <nav class="navbar-links">
+                <a href="/home">Home</a>
+                <a href="/cliente/login">Logout</a>
+            </nav>
+
+            <button id="darkModeToggle" class="btn">
+                <img src="/images/moon.png" alt="Ativar modo escuro" class="imagem-botao" />
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <h2 th:text="${cliente.nome}"></h2>
+            <a th:href="@{/cliente/{cpf}/itens(cpf=${cliente.cpf})}" class="buy-items-button">Comprar Itens</a>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h3>📞 Contatos</h3>
+                <p th:text="'Celular - ' + ${cliente.celular}"></p>
+                <p th:text="'Telefone - ' + ${cliente.telefone}"></p>
+                <p th:text="'Email - ' + ${cliente.email}"></p>
+            </div>
+
+            <div class="section">
+                <h3>📍 Endereço</h3>
+                <p th:text="'CEP: ' + ${endereco.getCep()}"></p>
+                <p th:text="'Estado: ' + ${endereco.getEstado()}"></p>
+                <p th:text="'Cidade: ' + ${endereco.getCidade()}"></p>
+                <p th:text="'Bairro: ' + ${endereco.getBairro()}"></p>
+                <p th:text="'Rua: ' + ${endereco.getRua()}"></p>
+                <p th:text="'Número: ' + ${endereco.getNumero()}"></p>
+                <p th:text="'Ponto de referência: ' + ${endereco.getPonto_referencia()}"></p>
+            </div>
+
+            <div class="section">
+                <h3>📝 Documentos</h3>
+                <p th:text="'CPF: ' + ${cliente.getCpf()}"></p>
+            </div>
+
+            <div class="section">
+                <h3>🐾 Animais</h3>
+                <ul>
+                    <li th:each="animal : ${cliente.getAnimais()}" th:text="${animal.getNome()}"></li>
+                    <li th:if="${#lists.isEmpty(cliente.getAnimais())}" class="no-records">Nenhum registro</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>🛒 Compras</h3>
+                <ul>
+                    <li th:each="compra : ${cliente.getItems()}">
+                        <a th:href="@{/cliente/{cpf}/confirmar_compra/{itemId} (cpf=${cliente.cpf}, itemId=${compra.id})}" th:text="${compra.nome}"></a>
+                    </li>
+                    <li th:if="${#lists.isEmpty(cliente.getItems())}" class="no-records">Nenhum registro</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="editar-cliente" class="add-animal-button">Atualizar dados</a>
+    </div>
+    
+    <script src="/js/darkModeToggle.js"></script>
+</body>
+</html>

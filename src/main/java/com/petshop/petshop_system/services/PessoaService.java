@@ -18,6 +18,4 @@ public class PessoaService {
         return pessoaRepository.findAll();
     }
 
-
-
 }

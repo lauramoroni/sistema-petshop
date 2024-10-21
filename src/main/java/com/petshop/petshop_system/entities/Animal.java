@@ -1,9 +1,9 @@
 package com.petshop.petshop_system.entities;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,45 +11,52 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-//sugestão para todas as classes: Validações com Jakarta Bean Validation. Validação em nível de aplicação antes de os dados serem enviados ao banco de dados. Isso ajuda a fornecer feedback ao usuário sobre entradas inválidas.
+import lombok.Setter;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name="tb_animal")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Animal {
     
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_animal")
-    private UUID id;  //posteriormente devemos definir um padrão de id para o animal
+    private Long id; 
 
     @Column(nullable=false)
     private String nome;
 
+    @Column(nullable=false)
     private String sexo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_especie", nullable=false)
-    private Especie especie;
-
-    @ManyToOne
-    @JoinColumn(name = "id_raca")
-    private Raca raca;
-
-    private String pelagem;
-    private String status;
+    @Column(nullable=false)
     private String Esterilizacao;
 
+    @Column(nullable = false)
+    private Integer idade;
+
+    @Column(nullable=false)
+    private String especie;
+
     @ManyToOne
-    @JoinColumn(name="id_pessoa", nullable=false)
-    private Pessoa pessoa;
+    @JoinColumn(name="cpf")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "crmv")
+    private MedVet medVet;  // Associação com o veterinário
+
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
+    private List<Hemograma> hemogramas = new ArrayList<>();
+
 }

@@ -1,10 +1,7 @@
 package com.petshop.petshop_system.entities;
 
-import java.util.UUID;
-
-import org.apache.commons.math3.analysis.function.Identity;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import java.math.BigDecimal;
+import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,22 +16,26 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name="tb_item")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
-    
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_item")
-    private UUID id;  
+    private Long id;
 
     @Column(nullable=false)
     private String nome;
 
     private String descrição;
 
-    private double preco;
-    
+    private int quantidade;
+
+    private BigDecimal preco;
+
+    @ManyToOne
+    @JoinColumn(name="cpf")
+    private Cliente cliente;
 }

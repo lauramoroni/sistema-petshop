@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Monitoramento - Clínica Veterinária</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+                
+       
+        body {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        } 
+        form {
+            background-color: #f4f4f4;
+            border:0px ;
+            box-shadow: 0 0 0px;
+        }
+        form input, form select, form textarea{
+            margin-left: 0px;
+            margin-right: 45px;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 90%;
+        }
+        .container {
+            margin-top: -130px;
+    
+            margin: 20px auto;
+            padding: 20px;
+            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #009688;
+            border-bottom: 2px solid #009688;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #009688;
+            
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .btn-add {
+            width: 50%;
+            background-color: #009688;
+            
+        }
+
+        .btn-update {
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-delete {
+            width: 100%;
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .dark-mode .btn-update {
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .dark-mode .btn-delete {
+            width: 100%;
+            background-color: #dc3545;
+            color: #fff;
+        }
+    </style>
+    
+</head>
+<body>
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>  
+<div class="container">
+    <h1>Painel de Monitoramento</h1>
+    <form th:action="@{/home}" method="get">
+        <button type="submit" class="btn">Home</button>
+    </form>
+
+    <!-- Seção de Clientes -->
+    <div class="section">
+        <h2>Clientes Registrados
+            <form th:action="@{/gerente/logs}" method="get">
+                <button type="submit" class="btn btn-add">Logs</button>
+            </form>
+        </h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente : ${clienteList}">
+                <td th:text="${cliente.getNome()}"></td>
+                <td th:text="${cliente.getEmail()}"></td>
+                <td th:text="${cliente.getCelular()}"></td>
+                <td>
+                    <form th:action="@{/gerente/deletar/cliente}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este cliente?');">
+                        <input type="hidden" name="cpf" th:value="${cliente.getCpf()}"/>
+                        <button type="submit" class="btn btn-delete">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            <!-- Repetir para outras operações -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Seção de Médicos Veterinários -->
+    <div class="section">
+        <h2>Veterinários Trabalhando
+            <form th:action="@{/gerente/cadastrarVet}" method="get">
+                <button type="submit" class="btn btn-add">Adicionar veterinário</button>
+            </form>
+        </h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Especialidade</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="veterinario : ${veterinarioList}">
+                <td th:text="${veterinario.getNome()}"></td>
+                <td th:text="${veterinario.getEspecialidade()}"></td>
+                <td th:text="${veterinario.getEmail()}"></td>
+                <td th:text="${veterinario.getCelular()}"></td>
+                <td>
+                    <form th:action="@{/gerente/atualizar}" method="get">
+                        <input type="hidden" name="crmv" th:value="${veterinario.getCrmv()}"/>
+                        <button type="submit" class="btn btn-update">Atualizar</button>
+                    </form>
+                    <form th:action="@{/gerente/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este veterinário?');">
+                        <input type="hidden" name="crmv" th:value="${veterinario.getCrmv()}"/>
+                        <button type="submit" class="btn btn-delete">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            <!-- Repetir para outros veterinários -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Produtos em Estoque
+            <form th:action="@{/item/cadastro}" method="get">
+                <button type="submit" class="btn btn-add">Adicionar item</button>
+            </form>
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Descrição</th>
+                    <th>Quantidade em Estoque</th>
+                    <th>Preço Unitário (R$)</th>
+                    <th>Aplicar Desconto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${itemList}">
+                    <td th:text="${item.getNome()}"></td>
+                    <td th:text="${item.getDescrição()}"></td>
+                    <td th:text="${item.getQuantidade()}"></td>
+                    <td th:text="${item.getPreco()}"></td>
+                    <td>
+                        <form th:action="@{/item/aplicar-desconto}" method="post">
+                            <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                            <input type="number" name="percentualDesconto" min="0" max="100" placeholder="Desconto (%)" required/>
+                            <button type="submit" class="btn btn-desconto">Aplicar</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/item/atualizar}" method="get">
+                            <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                            <button type="submit" class="btn btn-update">Atua</button>
+                        </form>
+                        <form th:action="@{/item/deletar}" method="post" onsubmit="return confirm('Você tem certeza que deseja deletar este item?');">
+                            <input type="hidden" th:value="${item.getId()}" name="itemId"/>
+                            <button type="submit" class="btn btn-delete">Del</button>
+                        </form>
+                    </td>
+                </tr>
+                <!-- Repetir para outros produtos -->
+            </tbody>
+        </table>
+    </div>
+</div>    
+
+</body>
+</html>

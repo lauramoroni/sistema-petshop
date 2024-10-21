@@ -1,57 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
-        <!-- Logo -->
-        <a href="/home" class="logo"></a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clauriana's Vet - Bem-vindo</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eef2f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-        <!-- Links da Navbar -->
-        <nav class="navbar-links">
-          <a href="/home">Home</a>
-        </nav>
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-        <!-- Botão de Modo Escuro -->
-        <button id="darkModeToggle" class="btn">
-          <img src="/images/moon.png" alt="Ativar modo escuro" class="imagem-botao" />
-        </button>
-      </div>
-    </header>
+    .welcome-section {
+      flex: 2;
+      padding: 20px;
+    }
 
-    <main class="content">
-      <div class="container">
-        <h1>Login</h1>
+    .welcome-section h1 {
+      color: #009688;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
 
-        <div class="error" style="color: red;" th:if="${error}">
-          <p th:text="${error}"></p>
-        </div>
+    .welcome-section p {
+      font-size: 1.2em;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
 
-        <form class="login_cliente" action="/cliente/login" method="POST">
-          <label for=></label>   
-          <form action="/cliente/login" method="POST">
-            <label for=""></label>
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" placeholder="CPF" required><br>
-    
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" placeholder="Senha" required><br>
+    .welcome-section img {
+      width: 50%;
+      border-radius: 8px;
+      margin-top: 20px;
+      transform: perspective(1000px) rotateY(35deg) rotateX(12deg);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
 
-          <button class="btn" type="submit">Login</button>
-        </form>
-      </div>
-    </main>
 
-    <footer>
-      <p>&copy; 2024 ClaurianaVet. Todos os direitos reservados.</p>
-    </footer>
+    .access-cards {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+    }
 
-    <script src="/js/darkModeToggle.js"></script>
-  </body>
+    .access-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .access-card:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .access-card h3 {
+      color: #009688;
+      margin-bottom: 10px;
+    }
+
+    .access-card p {
+      margin-bottom: 20px;
+    }
+
+    .access-card button {
+      background-color: #009688;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .access-card button:hover {
+      background-color: #00796b;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <section class="welcome-section">
+    <h1>Bem-vindo à Clauriana's Vet</h1>
+    <p>Somos especializados em cuidados de saúde para animais, oferecendo o melhor atendimento para o seu pet.</p>
+    <p>Faça login abaixo para acessar nossos serviços de maneira personalizada.</p>
+    <img th:src="@{/images/home.png}" alt="Imagem de animais felizes na clínica veterinária">
+  </section>
+
+  <div class="access-cards">
+    <div class="access-card">
+      <h3>Acesso Cliente</h3>
+      <p>Entre como cliente para ver seus agendamentos e histórico de consultas.</p>
+      <a href="/cliente/login"><button>Acessar</button></a>
+    </div>
+    <div class="access-card">
+      <h3>Acesso Gerente</h3>
+      <p>Gerencie os serviços da clínica e acompanhe os relatórios financeiros.</p>
+      <a href="/gerente/login"><button>Acessar</button></a>
+    </div>
+    <div class="access-card">
+      <h3>Acesso Médico Veterinário</h3>
+      <p>Visualize os registros dos pacientes e atualize informações de consultas.</p>
+      <a href="/veterinario/login"><button>Acessar</button></a>
+    </div>
+  </div>
+
+</div>
+</body>
 </html>

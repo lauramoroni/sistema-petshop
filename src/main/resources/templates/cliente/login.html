@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
-        <!-- Logo -->
-        <a href="/home" class="logo"></a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+  <div class="navbar">
+    <!-- Logo -->
+    <a href="/home" class="logo"></a>
 
-        <!-- Links da Navbar -->
-        <nav class="navbar-links">
-          <a href="/home">Home</a>
-        </nav>
+    <!-- Links da Navbar -->
+    <nav class="navbar-links">
+      <a href="/home">Home</a>
+    </nav>
 
-        <!-- Botão de Modo Escuro -->
-        <button id="darkModeToggle" class="btn">
-          <img src="/images/moon.png" alt="Ativar modo escuro" class="imagem-botao" />
-        </button>
-      </div>
-    </header>
+    <!-- Botão de Modo Escuro -->
+    <button id="darkModeToggle" class="btn">
+      <img src="/images/moon.png" alt="Ativar modo escuro" class="imagem-botao" />
+    </button>
+  </div>
+</header>
 
-    <main class="content">
-      <div class="container">
-        <h1>Login</h1>
+<main class="content">
+  <div class="container">
+    <h1>Login</h1>
 
-        <div class="error" style="color: red;" th:if="${error}">
-          <p th:text="${error}"></p>
-        </div>
+    <div class="error" style="color: red;" th:if="${error}">
+      <p th:text="${error}"></p>
+    </div>
 
-        <form class="login_cliente" action="/cliente/login" method="POST">
-          <label for=></label>   
-          <form action="/cliente/login" method="POST">
-            <label for=""></label>
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" placeholder="CPF" required><br>
-    
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" placeholder="Senha" required><br>
+    <form class="login_cliente" action="/cliente/login" method="POST">
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" name="cpf" placeholder="CPF" required><br>
 
-          <button class="btn" type="submit">Login</button>
-        </form>
-      </div>
-    </main>
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" placeholder="Senha" required><br>
 
-    <footer>
-      <p>&copy; 2024 ClaurianaVet. Todos os direitos reservados.</p>
-    </footer>
+      <button class="btn" type="submit">Login</button>
+    </form>
 
-    <script src="/js/darkModeToggle.js"></script>
-  </body>
+    <!-- Botão de Cadastro abaixo do formulário -->
+    <a href="/cadastro" class="btn-cadastro">Cadastro</a>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2024 ClaurianaVet. Todos os direitos reservados.</p>
+</footer>
+
+<script src="/js/darkModeToggle.js"></script>
+</body>
 </html>

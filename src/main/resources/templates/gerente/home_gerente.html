@@ -124,6 +124,9 @@
     <script th:src="@{/js/darkModeToggle.js}"></script>  
 <div class="container">
     <h1>Painel de Monitoramento</h1>
+    <form th:action="@{/home}" method="get">
+        <button type="submit" class="btn">Home</button>
+    </form>
 
     <!-- Seção de Clientes -->
     <div class="section">

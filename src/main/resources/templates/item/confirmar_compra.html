@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Confirmação de Compra</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <style>
         .container {
             max-width: 800px;
@@ -26,6 +27,10 @@
     </style>
 </head>
 <body>
+    <button id="darkModeToggle" class="btn">
+        <img src="/images/moon.png" alt="Imagem da lua" class="imagem-botao" />
+    </button>
+    <script th:src="@{/js/darkModeToggle.js}"></script>  
 <div class="container">
     <h2 class="text-center">Confirmação de Compra</h2>
 
